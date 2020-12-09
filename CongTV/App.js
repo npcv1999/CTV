@@ -1,4 +1,3 @@
-import { NavigationContainer } from '@react-navigation/native';
 import React, { useState } from 'react';
 import {
   SafeAreaView,
@@ -14,18 +13,23 @@ import FrLoginAndRegist from './Screens/FrLoginAndRegist';
 import {createStackNavigator} from "@react-navigation/stack";
 import Login from './Screens/Login';
 import Register from './Screens/Register';
-
+import Main from './Screens/Main';
+import {firebase} from "./db/firebase";
+import ListCrawl from './Screens/ListCrawl';
+import BottomTab from './Component/BottomTab';
 const Stack=createStackNavigator();
 const App =()=>{
   return(
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component ={FrLoginAndRegist} ></Stack.Screen>
-        <Stack.Screen name="Login" component ={Login}></Stack.Screen>
-        <Stack.Screen name="Regist" component ={Register}></Stack.Screen>
-      </Stack.Navigator>
-      {/* <FrLoginAndRegist></FrLoginAndRegist> */}
-    </NavigationContainer>    
+      <BottomTab></BottomTab>
+    // <ListCrawl></ListCrawl>
+    // <NavigationContainer>
+    //   <Stack.Navigator>
+    //     <Stack.Screen name="Chào mừng bạn" component ={FrLoginAndRegist} ></Stack.Screen>
+    //     <Stack.Screen name="Login" component ={Login}></Stack.Screen>
+    //     <Stack.Screen name="Regist" component ={Register}></Stack.Screen>
+    //     <Stack.Screen name="Main" component={Main}></Stack.Screen>
+    //   </Stack.Navigator>
+    // </NavigationContainer>    
   );
 }
 export default App

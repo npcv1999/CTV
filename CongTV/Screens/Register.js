@@ -1,157 +1,153 @@
-// import React from 'react'
-// import { View, Text, StyleSheet } from 'react-native'
-// import Button from '../Component/Button'
-// import InputValues from '../Component/InputValues'
-// import Pwd from '../Component/Pwd'
-
-// export default function Register() {
-//   return (
-//     <View style={styles.register}>
-//       <InputValues title='Tài khoản' icon='user'></InputValues>
-//       <InputValues title='Email' icon='mail'></InputValues>
-//       <Pwd title='Mật khẩu' icon='lock' isPwd ></Pwd>
-//       <Button btn='Đăng ký tài khoản'></Button>
-//     </View>
-//   )
-// }
-//  const styles=StyleSheet.create({
-//    register:{
-//      margin:10,
-//    }
-//  })
-
-import React from 'react'
-import {StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import React from 'react';
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+  Alert,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
-import Button from '../Component/Button';
-import {firebase} from "@react-native-firebase/app";
-import {auth} from "@react-native-firebase/auth";
-//import {firebase} from "firebase";
-import {ReactNativeFirebase} from '@react-native-firebase/app';
-import { useNavigation } from '@react-navigation/native';
-export default class Register  extends React.Component
-{
-    
-    state={
-        email:"",
-        password:"",
-        errorMessage:null,
-        icon:"eye-off",
-        pwd: true,
+import ViewBtn from '../Component/Button';
+import firebase from '../db/firebase';
+export default class Register extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: '',
+      email: '',
+      pass: '',
+      errorMessage: null,
+      icon: 'eye-off',
+      pwd: true,
     };
-    
-    handleSignUp = () => {
-        const { email, password } = this.state
-          auth()
-          .createUserWithEmailAndPassword(email, password)
-          .then(user => this.props.navigation.navigate('Main'))
-          .catch(error => this.setState({ errorMessage: error.message }))
-      }
-    changeIcon(){
-        this.setState(prevState => ({
-            icon: prevState.icon === 'eye' ? 'eye-off' : 'eye',
-            pwd:!prevState.pwd
-        }));
-    }
-    render(){
+  }
+
+  onChangUser = (value) => this.setState({email: value});
+  onChangPass = (value) => this.setState({pass: value});
+
+  oneRegist = () => {
+    const {email, pass} = this.state;
+    console.log({email, pass});
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, pass)
+      .catch(function (error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        if (errorCode == 'auth/weak-password') {
+          alert('The password is too weak.');
+        } else {
+          alert(errorMessage);
+        }
+        console.log(error);
+      });
+    // firebase.auth().createUserWithEmailAndPassword(email, pass)
+    // .catch(console.error())
+    // .then(()=> this.props.navigation.navigate("Main"))
+    // .catch(error => this.setState({errorMessage: error.message}))
+  };
+  changeIcon() {
+    this.setState((prevState) => ({
+      icon: prevState.icon === 'eye' ? 'eye-off' : 'eye',
+      pwd: !prevState.pwd,
+    }));
+  }
+  render() {
+    const {email, pass} = this.state;
     return (
-        <>
+      <>
         <View>
-            <Text style={styles.title}>Tài khoản</Text>
-            <View style ={styles.container}>
+          <Text style={styles.title}>Tên</Text>
+          <View style={styles.container}>
             <View style={styles.inputContainer}>
-                <Icon name="user" style={styles.icon} size={25} color="#D3D4D5"></Icon>
-                <TextInput 
-                style={styles.input} 
-                placeholder="Nhập tài khoản" 
-                >
-                </TextInput>
+              <Icon name="user" style={styles.icon} size={25} color="#D3D4D5" />
+              <TextInput
+                style={styles.input}
+                // value={name}
+                placeholder="Nhập tên"
+              />
             </View>
-            </View>
+          </View>
 
-            <Text style={styles.title}>Email</Text>
-            <View style ={styles.container}>
+          <Text style={styles.title}>Email</Text>
+          <View style={styles.container}>
             <View style={styles.inputContainer}>
-                <Icon name="mail" style={styles.icon} size={25} color="#D3D4D5"></Icon>
-                <TextInput 
-                style={styles.input} 
-                placeholder="Nhập email" 
-                onChangeText={email => this.setState({ email })}
-                value={this.state.email}
-                >
-                </TextInput>
+              <Icon name="mail" style={styles.icon} size={25} color="#D3D4D5" />
+              <TextInput
+                style={styles.input}
+                placeholder="Nhập email"
+                value={email}
+                onChangeText={this.onChangUser}
+              />
             </View>
-            </View>
-
+          </View>
         </View>
         <View>
-            <Text style={styles.title}>Mật khẩu</Text>
-            <View style ={styles.container}>
+          <Text style={styles.title}>Mật khẩu</Text>
+          <View style={styles.container}>
             <View style={styles.inputContainer}>
-                <Icon name="lock" style={styles.icon} size={25} color="#D3D4D5"></Icon>
-                <TextInput 
-                style={styles.input} 
-                placeholder="Nhập mật khẩu" 
+              <Icon name="lock" style={styles.icon} size={25} color="#D3D4D5" />
+              <TextInput
+                style={styles.input}
+                placeholder="Nhập mật khẩu"
+                value={pass}
                 secureTextEntry={this.state.pwd}
-                onChangeText={password => this.setState({ password })}
-                value={this.state.password} 
-                >
-                </TextInput>
-                    <Icon 
-                    name={this.state.icon} 
-                    style={styles.eye} 
-                    size={25} 
-                    color="#EC80B5"
-                    onPress={()=>this.changeIcon()}>
-                    </Icon>  
+                onChangeText={this.onChangPass}
+              />
+              <Icon
+                name={this.state.icon}
+                style={styles.eye}
+                size={25}
+                color="#EC80B5"
+                onPress={() => this.changeIcon()}
+              />
             </View>
-            </View>
+          </View>
         </View>
-        <Button btn='Đăng ký tài khoản' onPress={this.handleSignUp} ></Button>
-        </>      
-       
+        <TouchableOpacity onPress={this.oneRegist}>
+          <ViewBtn btn="Đăng ký tài khoản" />
+        </TouchableOpacity>
+      </>
     );
-    }
+  }
 }
 
-
 const styles = StyleSheet.create({
-    container:{  
-        justifyContent:"center",
-        alignItems:"center"   
-    },
-    inputContainer:{
-        backgroundColor:"#F8F9FA",
-        flexDirection:"row",
-        padding:1,
-        borderWidth:1,
-        //width:'80%',
-        borderColor:"#D3D4D5",
-        borderRadius:50, 
-        
-    },
-    title:{
-        color:"black",
-        fontWeight:"bold",
-        marginVertical:6,
-        fontSize:15,
-        marginLeft:"10%"
-    },
-    icon:{
-        marginLeft:"3%",
-        marginTop:"3%",
-        color:"#ff8c1a"
-    },
-    eye:{
-        marginRight:"3%",
-        marginTop:"3%",
-        color:"#ff8c1a"
-    },
-    input:{
-        color:"black",
-        flex:1,
-    },
-
-
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  inputContainer: {
+    backgroundColor: '#F8F9FA',
+    flexDirection: 'row',
+    padding: 1,
+    borderWidth: 1,
+    //width:'80%',
+    borderColor: '#D3D4D5',
+    borderRadius: 50,
+  },
+  title: {
+    color: 'black',
+    fontWeight: 'bold',
+    marginVertical: 6,
+    fontSize: 15,
+    marginLeft: '10%',
+  },
+  icon: {
+    marginLeft: '3%',
+    marginTop: '3%',
+    color: '#ff8c1a',
+  },
+  eye: {
+    marginRight: '3%',
+    marginTop: '3%',
+    color: '#ff8c1a',
+  },
+  input: {
+    color: 'black',
+    flex: 1,
+  },
 });
-

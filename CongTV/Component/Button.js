@@ -2,11 +2,13 @@ import React from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import { useNavigation } from '@react-navigation/native';
-const Button =({btn}) => {
+export default class ViewBtn extends React.Component {
+    render(){
+        const {btn}= this.props;
     // const navigation = useNavigation(); 
     return (
-        <TouchableOpacity 
-        style={styles.container} 
+        <View 
+        style={styles.container}
         // onPress={()=>navigation.navigate("Regist")}
         >
             <LinearGradient
@@ -19,8 +21,9 @@ const Button =({btn}) => {
                     {btn}
                 </Text>
             </LinearGradient>
-        </TouchableOpacity>
-    )
+        </View>
+        );
+    }
 }
  const styles=StyleSheet.create({
      text:{
@@ -45,4 +48,4 @@ const Button =({btn}) => {
      }
 
  })
- export default Button
+
