@@ -1,5 +1,6 @@
 import React from 'react'
 import { Text, StyleSheet, View, FlatList, Image, TouchableOpacity, Linking ,ActivityIndicator} from 'react-native'
+import Icon from 'react-native-vector-icons/AntDesign';
 import Loading from '../Component/Loading';
 
 
@@ -13,19 +14,29 @@ export default class DbITviec extends React.Component {
    }
    renderItem=(obj)=>{
         return (
-            <TouchableOpacity onPress={()=>{Linking.openURL(obj.item.href)}}>
+            <View>
+            {/* <TouchableOpacity onPress={()=>{Linking.openURL(obj.item.href)}}> */}
             <View style={styles.container}>
                 <View style={styles.img}>
                     <Image source={{uri : obj.item.logo}} 
                     style={{width: 50, height: 50}}></Image>
                 </View>
-                <View style={styles.info}>
+                <TouchableOpacity style={styles.info} onPress={()=>{Linking.openURL(obj.item.href)}}>
+                <View >
                     <Text style ={styles.title}>{obj.item.title}</Text>
                     <Text style= {styles.tag}>Description:</Text>
                     <Text style ={styles.text}>{obj.item.decription}</Text>
                 </View>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                <View style={styles.heart}>
+                    <Icon name ="hearto" size={25} color="#ff0066"></Icon>
+                </View>
+                </TouchableOpacity>
             </View>
-            </TouchableOpacity>
+            {/* </TouchableOpacity> */}
+            </View>
+
         )
         
         
@@ -33,10 +44,11 @@ export default class DbITviec extends React.Component {
    keyExtractor=(item)=> item.id;
 
    componentDidMount(){
-       const url= 'https://api.mocki.io/v1/62669198'
+       const url="https://congtimviec.firebaseio.com/itviec.json"
        fetch(url)
        .then((response)=> response.json())
        .then((json)=> {
+           console.log(json);
            setInterval(()=>{
             this.setState({data:json,
                 loading:false})
@@ -79,10 +91,11 @@ const styles = StyleSheet.create({
         justifyContent:"center",
         alignItems:"center",
         padding:20,
+        flex:1/6
     },
     info:{
         margin:5,
-        flex:1
+        flex:3/4
     },
     title:{
         fontSize:20,
@@ -90,9 +103,12 @@ const styles = StyleSheet.create({
     },
     text:{
         fontSize:12,
-        textAlign:"left"
+        textAlign:"left",
     },
     tag:{
         fontWeight:"bold"
     },
+    heart:{
+        margin:1
+    }
 })

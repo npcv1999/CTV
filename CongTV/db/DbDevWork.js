@@ -35,10 +35,11 @@ export default class DbDevWork extends React.Component {
    keyExtractor=(item)=> item.title;
 
    componentDidMount(){
-       const url= 'https://api.mocki.io/v1/767c2141'
+       const url= "https://congtimviec.firebaseio.com/devwork.json"
        fetch(url)
        .then((response)=> response.json())
        .then((json)=> {
+           console.log(json)
         setInterval(()=>{
             this.setState({data:json,
                 loading:false})
