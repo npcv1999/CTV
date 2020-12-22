@@ -1,88 +1,156 @@
 import React from 'react'
-import { Text, StyleSheet, View, FlatList, Image, TouchableOpacity, Linking ,ActivityIndicator} from 'react-native'
+import { TextInput,Text, StyleSheet, View, FlatList, Image, TouchableOpacity, Linking ,ActivityIndicator} from 'react-native'
 import Icon from 'react-native-vector-icons/AntDesign';
 import Loading from '../Component/Loading';
-
 
 export default class DbITviec extends React.Component {
    constructor(props){
        super(props)
        this.state={
            data:[],
-           loading:true
+           text:'',
+           loading:true,
        }
-   }
-   renderItem=(obj)=>{
+       this.arrayHolder=[];
+    } 
+    //RenderItem for flatlist
+    renderItem=(obj)=>{
         return (
-            <View>
-            {/* <TouchableOpacity onPress={()=>{Linking.openURL(obj.item.href)}}> */}
-            <View style={styles.container}>
-                <View style={styles.img}>
-                    <Image source={{uri : obj.item.logo}} 
-                    style={{width: 50, height: 50}}></Image>
+           <>
+                <View style={styles.container}>
+                    <View style={styles.img} >
+                        <Image source={{uri : obj.item.logo}} 
+                        style={{width: 60, height: 60}}></Image>
+                    </View>
+                    <View style={styles.detail}>
+                        <View style={styles.info}>            
+                            <TouchableOpacity  onPress={()=>{Linking.openURL(obj.item.href)}}>
+                                <Text style ={styles.title}>{obj.item.title}</Text>
+                                <Text style= {styles.tag}>Description:</Text>
+                                <Text style ={styles.text}>{obj.item.decription}</Text>  
+                            </TouchableOpacity>
+                        </View>
+                        <TouchableOpacity style={styles.heart}>
+                                    <Icon name ="hearto" size={25} color="#ff0066"></Icon>
+                        </TouchableOpacity>  
+                    </View>          
                 </View>
-                <TouchableOpacity style={styles.info} onPress={()=>{Linking.openURL(obj.item.href)}}>
-                <View >
-                    <Text style ={styles.title}>{obj.item.title}</Text>
-                    <Text style= {styles.tag}>Description:</Text>
-                    <Text style ={styles.text}>{obj.item.decription}</Text>
-                </View>
-                </TouchableOpacity>
-                <TouchableOpacity>
-                <View style={styles.heart}>
-                    <Icon name ="hearto" size={25} color="#ff0066"></Icon>
-                </View>
-                </TouchableOpacity>
-            </View>
-            {/* </TouchableOpacity> */}
-            </View>
+            </>
+    )};
 
-        )
-        
-        
-};
-   keyExtractor=(item)=> item.id;
-
-   componentDidMount(){
+    //Key, Separator, Empty
+    keyExtractor=(item)=> item.id;
+    //Separator
+    ItemSeparatorComponent = ()=>
+       <View style={styles.separator}></View>;
+    //EmptyItem
+    ListEmptyComponent=()=>
+        <View style={styles.viewEmpty}>
+            <Text style={styles.textEmpty}>
+                Không tìm thấy dữ liệu!{"\n"}
+                Vui lòng nhập lại...
+            </Text>
+        </View>;
+    //Fetch data from REST API firebase 
+    componentDidMount(){
        const url="https://congtimviec.firebaseio.com/itviec.json"
        fetch(url)
        .then((response)=> response.json())
        .then((json)=> {
-           console.log(json);
-           setInterval(()=>{
-            this.setState({data:json,
-                loading:false})
-           },1000)     
+        //    console.log(json);
+            this.setState({
+                data:json,
+                // set loading false 
+                loading:false}, 
+                ()=>{
+                    //arraySearch
+                    this.arrayHolder=json;  
+                })                
        })
        .catch(function(error) {
         console.log('There has been a problem with your fetch operation: ' + error.message);
-         // ADD THIS THROW error
           throw error;
         });    
     }
+    //Search item
+      searchData(text) {
+        const newData = this.arrayHolder.filter(item => {
+          const itemData = item.title.toUpperCase();
+          const textData = text.toUpperCase();
+          return itemData.indexOf(textData) > -1;    
+        });
+            this.setState({
+                data:newData,
+                text: text
+                })      
+      }
+
     render() {
-        console.log(this.state.data);
-        if(this.state.loading===true) 
+        // console.log(this.state.data);
+        //Loading
+        if(this.state.loading) 
         {
             return(
                 <Loading></Loading>
             )  
         }
-        return(    
+        //FlatListJob
+        return( 
+            <View style={styles.MainContainer}>
+            <TextInput 
+                style={styles.textInput}
+                onChangeText={(text) => this.searchData(text)}
+                value={this.state.text}
+                underlineColorAndroid='transparent'
+                placeholder="Tìm kiếm ..." />   
             <FlatList
                 data={this.state.data}
                 renderItem={this.renderItem}
+                ListEmptyComponent={this.ListEmptyComponent}
                 keyExtractor={this.keyExtractor}
+                ItemSeparatorComponent={this.ItemSeparatorComponent}
             />
+            </View>
         )
     }
 }
-
+//Styles
 const styles = StyleSheet.create({
+    //Search
+    MainContainer: {
+        justifyContent: 'center',
+        flex: 1,
+        margin: 5,
+      },
+      textInput: {
+        textAlign: 'center',
+        height: 42,
+        borderWidth: 1,
+        borderColor: '#009688',
+        borderRadius: 8,
+        backgroundColor: "#FFFF"
+     
+      },
+
+
     container:{
+        //Shadow item
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.18,
+        shadowRadius: 3.67,
+
+        elevation:2,
+        //
+        padding:5,
+        height:"auto",
+        marginLeft:5,
+        marginRight:5,
         flexDirection:"row",
-        borderColor:"gray",
-        borderWidth:0.5,
+        borderRadius:3.67,
         flex:1,
         alignItems:"center",
         justifyContent:"center"
@@ -90,25 +158,46 @@ const styles = StyleSheet.create({
     img:{
         justifyContent:"center",
         alignItems:"center",
-        padding:20,
+        padding:10,
         flex:1/6
     },
     info:{
-        margin:5,
-        flex:3/4
+        flex:1,
+        alignItems:"center"
     },
     title:{
-        fontSize:20,
-        color:"red"
+        textAlign:"auto",
+        fontSize:16,
+        color:"red",
+        marginTop:10,
+        marginBottom:10,
+        borderBottomWidth:0.5
     },
     text:{
         fontSize:12,
-        textAlign:"left",
+        textAlign:"auto",
     },
     tag:{
-        fontWeight:"bold"
+        fontWeight:"bold",
+        marginBottom:5
     },
     heart:{
-        margin:1
+        alignSelf:"flex-end",
+        justifyContent:"flex-end"
+    },
+    separator:{
+        height:10,
+        width:"100%"
+    },
+    detail:{
+        flex:1,
+    },
+    textEmpty:{
+        color:"red",
+        fontSize:16,
+    },
+    viewEmpty:{
+        alignItems:"center",
+        justifyContent:"center",
     }
 })

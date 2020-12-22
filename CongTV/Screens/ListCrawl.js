@@ -24,7 +24,6 @@ export default function ListCrawl (){
         <Tab.Screen name="ITViec" component={DbITviec}>
         </Tab.Screen>
         <Tab.Screen name="DevWork" component={DbDevWork} />
-        <Tab.Screen name="Home" component={DbITviec} />
       </Tab.Navigator> 
     // <>
     // {/* <StatusBar barStyle={"dark-content"}></StatusBar> */}

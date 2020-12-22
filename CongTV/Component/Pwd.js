@@ -25,7 +25,7 @@ class Pwd extends React.Component{
                 <TextInput 
                 style={styles.input} 
                 placeholder={placeholder} 
-                secureTextEntry={this.state.pwd} 
+                secureTextEntry={this.state.    } 
                 >
                 </TextInput>
                 {isPwd &&
