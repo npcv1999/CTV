@@ -1,28 +1,26 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {
-  TextInput,
   Text,
   StyleSheet,
   View,
-  FlatList,
   Image,
   TouchableOpacity,
-  Linking,
+  FlatList,
 } from 'react-native';
-import Loading from '../Component/Loading';
-import Icon from 'react-native-vector-icons/AntDesign';
-
-export default class DbDevWork extends React.Component {
+import {TextInput} from 'react-native-gesture-handler';
+import Icon from 'react-native-vector-icons/Feather';
+export default class Building extends Component {
   constructor(props) {
     super(props);
     this.state = {
       data: [],
-      text: '',
-      loading: true,
+      comments: '',
     };
-    this.arrayHolder = [];
   }
-  renderItem1 = (obj) => {
+  save() {
+    console.log(this.state.comments);
+  }
+  renderItem = (obj) => {
     return (
       <>
         <View style={styles.container}>
@@ -38,16 +36,29 @@ export default class DbDevWork extends React.Component {
                   Linking.openURL(obj.item.href);
                 }}>
                 <Text style={styles.title}>{obj.item.title}</Text>
-                <Text style={styles.tag}>Công ty:</Text>
-                <Text style={styles.text}>{obj.item.company}</Text>
-                <Text style={styles.tag}>Mức lương</Text>
-                <Text style={styles.money}>{obj.item.luong}</Text>
+                <Text style={styles.tag}>Description:</Text>
+                <Text style={styles.text}>{obj.item.decription}</Text>
               </TouchableOpacity>
             </View>
             <TouchableOpacity style={styles.heart}>
-              <Icon name="hearto" size={20} color="#ff0066"></Icon>
+              <Icon name="star" size={20} color="#ff0066"></Icon>
             </TouchableOpacity>
           </View>
+        </View>
+        <View>
+          <TextInput
+            style={styles.comments}
+            value={this.state.comments}
+            onChangeText={(comments) => this.setState({comments})}></TextInput>
+          <TouchableOpacity
+            onPress={() => this.save()}
+            style={{
+              position: 'absolute',
+              top: 10,
+              right: 20,
+            }}>
+            <Icon name="send" size={25}></Icon>
+          </TouchableOpacity>
         </View>
       </>
     );
@@ -67,20 +78,12 @@ export default class DbDevWork extends React.Component {
   );
   //Fetch data
   componentDidMount() {
-    const url = 'https://congtimviec.firebaseio.com/devwork.json';
+    const url = 'https://congtimviec.firebaseio.com/top.json';
     fetch(url)
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
-        this.setState(
-          {
-            data: json,
-            loading: false,
-          },
-          () => {
-            this.arrayHolder = json;
-          },
-        );
+        this.setState({data: json, loading: false});
       })
       .catch(function (error) {
         console.log(
@@ -91,62 +94,18 @@ export default class DbDevWork extends React.Component {
         throw error;
       });
   }
-  //Search item
-  searchData(text) {
-    const newData = this.arrayHolder.filter((item) => {
-      const itemData = item.title.toUpperCase();
-      const textData = text.toUpperCase();
-      return itemData.indexOf(textData) > -1;
-    });
-    this.setState({
-      data: newData,
-      text: text,
-    });
-  }
-
   render() {
-    // console.log(this.state.data);
-    if (this.state.loading) {
-      return <Loading></Loading>;
-    }
     return (
-      <View style={styles.MainContainer}>
-        <TextInput
-          style={styles.textInput}
-          onChangeText={(text) => this.searchData(text)}
-          value={this.state.text}
-          underlineColorAndroid="transparent"
-          placeholder="Tìm kiếm ..."
-        />
-        <FlatList
-          extraData={this.state}
-          data={this.state.data}
-          renderItem={this.renderItem1}
-          // ListEmptyComponent={this.ListEmptyComponent}
-          keyExtractor={this.keyExtractor}
-          ItemSeparatorComponent={this.ItemSeparatorComponent}
-        />
-      </View>
+      <FlatList
+        data={this.state.data}
+        renderItem={this.renderItem}
+        keyExtractor={this.keyExtractor}
+        ItemSeparatorComponent={this.ItemSeparatorComponent}></FlatList>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  //Search
-  MainContainer: {
-    justifyContent: 'center',
-    flex: 1,
-    margin: 5,
-  },
-  textInput: {
-    textAlign: 'center',
-    height: 42,
-    borderWidth: 1,
-    borderColor: '#009688',
-    borderRadius: 8,
-    backgroundColor: '#FFFF',
-  },
-
   container: {
     //Shadow item
     shadowColor: '#000',
@@ -160,9 +119,10 @@ const styles = StyleSheet.create({
     elevation: 2,
     //
     padding: 5,
+    paddingLeft: 15,
+    paddingRight: 15,
     height: 'auto',
-    marginLeft: 5,
-    marginRight: 5,
+
     flexDirection: 'row',
     borderRadius: 3.67,
     flex: 1,
@@ -213,12 +173,13 @@ const styles = StyleSheet.create({
   detail: {
     flex: 1,
   },
-  textEmpty: {
-    color: 'red',
-    fontSize: 16,
-  },
-  viewEmpty: {
-    alignItems: 'center',
-    justifyContent: 'center',
+  comments: {
+    borderRadius: 10,
+    borderWidth: 0.5,
+    // backgroundColor: 'red',
+    marginLeft: 5,
+    marginRight: 5,
+    position: 'relative',
+    paddingLeft: 20,
   },
 });

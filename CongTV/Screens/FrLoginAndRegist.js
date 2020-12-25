@@ -13,6 +13,7 @@ import MaskedTitle from '../Component/MaskedTitle';
 import Login from './Login';
 import Register from './Register';
 
+
 export default function FrLoginAndRegist() {
   const [state, setState] = useState(0);
   return (
