@@ -8,7 +8,6 @@ import {
   Image,
   TouchableOpacity,
   Linking,
-  ActivityIndicator,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Loading from '../Component/Loading';

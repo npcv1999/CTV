@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -6,21 +6,24 @@ import {
   Text,
   StatusBar,
   TouchableOpacity,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
 } from 'react-native';
 import 'react-native-gesture-handler';
 import FrLoginAndRegist from './Screens/FrLoginAndRegist';
-import {createStackNavigator} from "@react-navigation/stack";
+import {createStackNavigator} from '@react-navigation/stack';
 import Login from './Screens/Login';
 import Register from './Screens/Register';
 import Main from './Screens/Main';
-import {firebase} from "./db/firebase";
+import {firebase} from './db/firebase';
 import ListCrawl from './Screens/ListCrawl';
 import BottomTab from './Component/BottomTab';
-const Stack=createStackNavigator();
-const App =()=>{
-  return(
-      <BottomTab></BottomTab>
+import Welcome from './Screens/Welcome';
+import GoogleSign from './Component/GoogleSign';
+const Stack = createStackNavigator();
+const App = () => {
+  return (
+    <Welcome></Welcome>
+    // <BottomTab></BottomTab>
     // <ListCrawl></ListCrawl>
     // <NavigationContainer>
     //   <Stack.Navigator>
@@ -29,8 +32,7 @@ const App =()=>{
     //     <Stack.Screen name="Regist" component ={Register}></Stack.Screen>
     //     <Stack.Screen name="Main" component={Main}></Stack.Screen>
     //   </Stack.Navigator>
-    // </NavigationContainer>    
+    // </NavigationContainer>
   );
-}
-export default App
-
+};
+export default App;

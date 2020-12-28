@@ -17,8 +17,19 @@ export default class Building extends Component {
       comments: '',
     };
   }
+
   save() {
     console.log(this.state.comments);
+    fetch('https://congtimviec.firebaseio.com/top/3.json', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        comments: this.state.comments,
+      }),
+    });
   }
   renderItem = (obj) => {
     return (
@@ -49,7 +60,7 @@ export default class Building extends Component {
           <TextInput
             style={styles.comments}
             value={this.state.comments}
-            onChangeText={(comments) => this.setState({comments})}></TextInput>
+            onChangeText={this.setState.comments}></TextInput>
           <TouchableOpacity
             onPress={() => this.save()}
             style={{
@@ -64,7 +75,7 @@ export default class Building extends Component {
     );
   };
   //Key
-  keyExtractor = (item) => item.title;
+  keyExtractor = (item) => item.id;
   //Separator
   ItemSeparatorComponent = () => <View style={styles.separator}></View>;
   //EmptyItem
@@ -79,28 +90,44 @@ export default class Building extends Component {
   //Fetch data
   componentDidMount() {
     const url = 'https://congtimviec.firebaseio.com/top.json';
-    fetch(url)
-      .then((response) => response.json())
-      .then((json) => {
-        console.log(json);
-        this.setState({data: json, loading: false});
-      })
-      .catch(function (error) {
-        console.log(
-          'There has been a problem with your fetch operation: ' +
-            error.message,
-        );
-        // ADD THIS THROW error
-        throw error;
-      });
+
+    // fetch(url)
+    //   .then((response) => response.json())
+    //   .then((json) => {
+    //     console.log(json);
+    //     this.setState({data: json, loading: false});
+    //   })
+    //   .catch(function (error) {
+    //     console.log(
+    //       'There has been a problem with your fetch operation: ' +
+    //         error.message,
+    //     );
+    //     // ADD THIS THROW error
+    //     throw error;
+    //   });
   }
   render() {
     return (
-      <FlatList
-        data={this.state.data}
-        renderItem={this.renderItem}
-        keyExtractor={this.keyExtractor}
-        ItemSeparatorComponent={this.ItemSeparatorComponent}></FlatList>
+      <View>
+        <FlatList
+          data={this.state.data}
+          renderItem={this.renderItem}
+          keyExtractor={this.keyExtractor}
+          ItemSeparatorComponent={this.ItemSeparatorComponent}></FlatList>
+        <TextInput
+          style={styles.comments}
+          value={this.state.comments}
+          onChangeText={(text) => this.setState({comments: text})}></TextInput>
+        <TouchableOpacity
+          onPress={() => this.save()}
+          style={{
+            position: 'absolute',
+            top: 10,
+            right: 20,
+          }}>
+          <Icon name="send" size={25}></Icon>
+        </TouchableOpacity>
+      </View>
     );
   }
 }

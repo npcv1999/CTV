@@ -15,16 +15,23 @@ import DbDevWork from '../db/DbDevWork';
 import {NavigationContainer} from '@react-navigation/native';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
+import Login from './Login';
+import Loogin from './Loogin';
+import Imageslide from './Imageslide';
+import Welcome from './Welcome';
 const Tab = createMaterialTopTabNavigator();
 
 export default function ListCrawl() {
   // const [state, setState] = useState(0);
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="ITViec" component={DbITviec}></Tab.Screen>
-      <Tab.Screen name="DevWork" component={DbDevWork} />
-    </Tab.Navigator>
-    // <>
+    // <Tab.Navigator>
+    //   <Tab.Screen name="ITViec" component={DbITviec}></Tab.Screen>
+    //   <Tab.Screen name="DevWork" component={DbDevWork} />
+    // </Tab.Navigator>
+
+    <Welcome></Welcome>
+    // <GoogleSign></GoogleSign>
+    // <Login>
     // {/* <StatusBar barStyle={"dark-content"}></StatusBar> */}
     //   <SafeAreaView style={styles.container}>
     //     <MaskedTitle style={styles.title}>
@@ -48,7 +55,7 @@ export default function ListCrawl() {
     //     {state===1 && (<DbDevWork></DbDevWork>)}
     //   </View>    */}
     //   </SafeAreaView>
-    // </>
+    // </Login>
   );
 }
 
