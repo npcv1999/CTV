@@ -14,6 +14,7 @@ import {theme} from '../constants';
 import Text from '../Component/Text';
 import firebase from '../db/firebase';
 import GoogleSign from '../Component/GoogleSign';
+import FBLoginButton from '../Component/FacebookLogin';
 
 const {width, height} = Dimensions.get('window');
 
@@ -265,18 +266,11 @@ class Welcome extends Component {
           {this.renderIllustrations()}
           {this.renderSteps()}
         </Block>
+
         <Block middle flex={0.5} margin={[0, theme.sizes.padding * 2]}>
+          {/* Login =======================================================*/}
           <GoogleSign></GoogleSign>
-          {/* <Button1 gradient onPress={this.google}>
-            <Text center semibold white>
-              Đăng nhập với Google
-            </Text>
-          </Button1> */}
-          <Button1 shadow onPress={() => navigation.navigate('SignUp')}>
-            <Text center semibold>
-              Đăng nhập với Facebook
-            </Text>
-          </Button1>
+          <FBLoginButton></FBLoginButton>
           <Button1 onPress={() => this.setState({showTerms: true})}>
             <Text center caption gray>
               Điều khoản sử dụng

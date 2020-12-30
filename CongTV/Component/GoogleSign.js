@@ -74,7 +74,7 @@ export default function GoogleSign() {
   const [userInfo, setuserInfo] = useState([]);
   return (
     <>
-      <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
+      <View style={styles.container}>
         <GoogleSigninButton
           style={{width: 300, height: 60}}
           size={GoogleSigninButton.Size.Wide}
