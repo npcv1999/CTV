@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -15,15 +15,15 @@ import Login from './Screens/Login';
 import Register from './Screens/Register';
 import Main from './Screens/Main';
 import {firebase} from './db/firebase';
-import ListCrawl from './Screens/ListCrawl';
+import ListCrawl from './Screens/Home';
 import BottomTab from './Component/BottomTab';
-import Welcome from './Screens/Welcome';
-import GoogleSign from './Component/GoogleSign';
-const Stack = createStackNavigator();
+import HomeStack from './navigation/HomeStack';
+import Routes from './navigation/Routes';
+import Providers from './navigation';
+
 const App = () => {
   return (
-    <Welcome></Welcome>
-    // <BottomTab></BottomTab>
+    <Providers></Providers>
     // <ListCrawl></ListCrawl>
     // <NavigationContainer>
     //   <Stack.Navigator>

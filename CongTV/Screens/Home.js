@@ -24,38 +24,10 @@ const Tab = createMaterialTopTabNavigator();
 export default function ListCrawl() {
   // const [state, setState] = useState(0);
   return (
-    // <Tab.Navigator>
-    //   <Tab.Screen name="ITViec" component={DbITviec}></Tab.Screen>
-    //   <Tab.Screen name="DevWork" component={DbDevWork} />
-    // </Tab.Navigator>
-
-    <Welcome></Welcome>
-    // <GoogleSign></GoogleSign>
-    // <Login>
-    // {/* <StatusBar barStyle={"dark-content"}></StatusBar> */}
-    //   <SafeAreaView style={styles.container}>
-    //     <MaskedTitle style={styles.title}>
-    //     Danh sách việc làm trang
-    //     </MaskedTitle>
-    //   {/* <View style={styles.tab}>
-    //     <TouchableOpacity
-    //     onPress={() => setState(0)}
-    //     style={[styles.button, state ===0 &&{borderBottomColor:'blue'}]}>
-    //       <Text style={[styles.btnText, state===0 &&{color:'blue'}]}>ITviec</Text>
-    //     </TouchableOpacity>
-    //     <TouchableOpacity
-    //     onPress={()=> setState(1)}
-    //     style={[styles.button, state ===1 &&{borderBottomColor:'blue'}]} >
-    //       <Text style={[styles.btnText, state===1 && {color:'blue'}]}>Devwork</Text>
-    //     </TouchableOpacity>
-    //   </View> */}
-
-    //   {/* <View style={styles.wrapper}>
-    //     {state===0 && (<DbITviec></DbITviec>)}
-    //     {state===1 && (<DbDevWork></DbDevWork>)}
-    //   </View>    */}
-    //   </SafeAreaView>
-    // </Login>
+    <Tab.Navigator>
+      <Tab.Screen name="ITViec" component={DbITviec}></Tab.Screen>
+      <Tab.Screen name="DevWork" component={DbDevWork} />
+    </Tab.Navigator>
   );
 }
 

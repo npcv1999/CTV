@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useContext} from 'react';
 import {
   Animated,
   Dimensions,
@@ -15,14 +15,10 @@ import Text from '../Component/Text';
 import firebase from '../db/firebase';
 import GoogleSign from '../Component/GoogleSign';
 import FBLoginButton from '../Component/FacebookLogin';
+import ButtonSocial from './useContext';
 
 const {width, height} = Dimensions.get('window');
-
 class Welcome extends Component {
-  static navigationOptions = {
-    header: null,
-  };
-
   scrollX = new Animated.Value(0);
 
   constructor(props) {
@@ -205,44 +201,8 @@ class Welcome extends Component {
     );
   }
   //google api
-  google = () => {
-    console.log('hi em');
-    firebase
-      .auth()
-      .getRedirectResult()
-      .then(function (result) {
-        if (result.credential) {
-          // This gives you a Google Access Token.
-          var token = result.credential.accessToken;
-        }
-        var user = result.user;
-      });
-    var credential = firebase.auth.GoogleAuthProvider.credential(token);
-    var provider = new firebase.auth.GoogleAuthProvider();
-    provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-    firebase
-      .auth()
-      .signInWithCredential(credential)
-      .then(function (result) {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        var token = result.credential.accessToken;
-        // The signed-in user info.
-        var user = result.user;
-        // ...
-      })
-      .catch(function (error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // The email of the user's account used.
-        var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential;
-        // ...
-      });
-  };
+
   render() {
-    const {navigation} = this.props;
     return (
       <Block>
         <Block center bottom flex={0.4}>
@@ -269,8 +229,8 @@ class Welcome extends Component {
 
         <Block middle flex={0.5} margin={[0, theme.sizes.padding * 2]}>
           {/* Login =======================================================*/}
-          <GoogleSign></GoogleSign>
-          <FBLoginButton></FBLoginButton>
+          <ButtonSocial></ButtonSocial>
+
           <Button1 onPress={() => this.setState({showTerms: true})}>
             <Text center caption gray>
               Điều khoản sử dụng
