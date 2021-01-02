@@ -8,7 +8,7 @@ import {
   BuilDingScreen,
   FavoriteScreen,
   Profile,
-} from '../Component/StackScreen';
+} from '../Screens/StackScreen';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 const Tab = createMaterialBottomTabNavigator();
 export default function BottomTab({size = 20}) {

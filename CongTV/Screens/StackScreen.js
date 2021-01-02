@@ -1,8 +1,8 @@
 import React, {useContext} from 'react';
 import {Text, View, StyleSheet, Button} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
-import ListCrawl from '../Screens/Home';
-import Building from './Building';
+import ListCrawl from './Home';
+import Building from '../Screens/Building';
 import {AuthContext} from '../navigation/AuthProvider';
 const Stack = createStackNavigator();
 

@@ -15,9 +15,6 @@ import DbDevWork from '../db/DbDevWork';
 import {NavigationContainer} from '@react-navigation/native';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
-import Login from './Login';
-import Loogin from './Loogin';
-import Imageslide from './Imageslide';
 import Welcome from './Welcome';
 const Tab = createMaterialTopTabNavigator();
 
