@@ -9,16 +9,7 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 import 'react-native-gesture-handler';
-import FrLoginAndRegist from './Screens/FrLoginAndRegist';
-import {createStackNavigator} from '@react-navigation/stack';
-import Login from './Screens/Login';
-import Register from './Screens/Register';
-import Main from './Screens/Main';
-import {firebase} from './db/firebase';
-import ListCrawl from './Screens/Home';
-import BottomTab from './Component/BottomTab';
-import HomeStack from './navigation/HomeStack';
-import Routes from './navigation/Routes';
+
 import Providers from './navigation';
 
 const App = () => {

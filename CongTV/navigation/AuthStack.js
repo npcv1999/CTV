@@ -1,13 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {View} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import AsyncStorage from '@react-native-community/async-storage';
 import {GoogleSignin} from '@react-native-community/google-signin';
-import BottomTab from '../Component/BottomTab';
-import ListCrawl from '../Screens/Home';
-import useContext from '../Screens/useContext';
-import ButtonSocial from '../Screens/useContext';
 import Welcome from '../Screens/Welcome';
 
 const Stack = createStackNavigator();

@@ -10,12 +10,8 @@ import {
 } from 'react-native';
 import 'react-native-gesture-handler';
 import DbITviec from '../db/DbITviec';
-import MaskedTitle from '../Component/MaskedTitle';
 import DbDevWork from '../db/DbDevWork';
-import {NavigationContainer} from '@react-navigation/native';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import {createStackNavigator} from '@react-navigation/stack';
-import Welcome from './Welcome';
 const Tab = createMaterialTopTabNavigator();
 
 export default function ListCrawl() {

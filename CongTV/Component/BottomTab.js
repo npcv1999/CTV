@@ -7,7 +7,7 @@ import {
   HomeStackScreen,
   BuilDingScreen,
   FavoriteScreen,
-  Profile,
+  ProfileScreen,
 } from '../Screens/StackScreen';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 const Tab = createMaterialBottomTabNavigator();
@@ -52,7 +52,7 @@ export default function BottomTab({size = 20}) {
       />
       <Tab.Screen
         name="Profile"
-        component={Profile}
+        component={ProfileScreen}
         options={{
           tabBarLabel: 'Tài khoản',
           tabBarColor: '#ff944d',

@@ -52,7 +52,7 @@ export default function FBLoginButton({navigation}) {
           name="facebook-square"
           size={30}
           color="white"></Icon>
-        <Text style={styles.text}>Đăng nhập với facebook</Text>
+        <Text style={styles.text}>Đăng nhập với Facebook</Text>
       </TouchableOpacity>
     </View>
   );
@@ -62,7 +62,7 @@ export default function FBLoginButton({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: 300,
+    width: 295,
     height: 90,
     alignSelf: 'center',
   },
@@ -83,5 +83,6 @@ const styles = StyleSheet.create({
     color: 'white',
     justifyContent: 'center',
     alignItems: 'center',
+    fontWeight: 'bold',
   },
 });

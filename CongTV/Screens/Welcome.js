@@ -12,10 +12,7 @@ import Block from '../Component/Block';
 import Button1 from '../Component/Button1';
 import {theme} from '../constants';
 import Text from '../Component/Text';
-import firebase from '../db/firebase';
-import GoogleSign from '../Component/GoogleSign';
-import FBLoginButton from '../Component/FacebookLogin';
-import ButtonSocial from './useContext';
+import ButtonSocial from './Social';
 
 const {width, height} = Dimensions.get('window');
 class Welcome extends Component {
@@ -227,7 +224,7 @@ class Welcome extends Component {
           {this.renderSteps()}
         </Block>
 
-        <Block middle flex={0.5} margin={[0, theme.sizes.padding * 2]}>
+        <Block middle flex={0.5} margin={[1, theme.sizes.padding * 2]}>
           {/* Login =======================================================*/}
           <ButtonSocial></ButtonSocial>
 

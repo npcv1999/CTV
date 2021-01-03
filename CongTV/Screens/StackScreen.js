@@ -1,9 +1,10 @@
-import React, {useContext} from 'react';
-import {Text, View, StyleSheet, Button} from 'react-native';
+import React from 'react';
+import {StyleSheet} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import ListCrawl from './Home';
 import Building from '../Screens/Building';
-import {AuthContext} from '../navigation/AuthProvider';
+import Profile from './Profile';
+
 const Stack = createStackNavigator();
 
 function HomeStackScreen() {
@@ -17,7 +18,7 @@ function HomeStackScreen() {
       <Stack.Screen
         name="Danh sách việc từ trang"
         component={ListCrawl}
-        options={{headerTitleAlign: 'center'}}
+        options={{headerTitleAlign: 'center', headerTintColor: 'white'}}
       />
     </Stack.Navigator>
   );
@@ -33,7 +34,7 @@ function BuilDingScreen() {
       <Stack.Screen
         name="Top công ty"
         component={Building}
-        options={{headerTitleAlign: 'center'}}
+        options={{headerTitleAlign: 'center', headerTintColor: 'white'}}
       />
     </Stack.Navigator>
   );
@@ -49,25 +50,29 @@ function FavoriteScreen() {
       <Stack.Screen
         name="Danh sách việc yêu thích"
         component={Profile}
-        options={{headerTitleAlign: 'center'}}
+        options={{headerTitleAlign: 'center', headerTintColor: 'white'}}
       />
     </Stack.Navigator>
   );
 }
-function Profile() {
-  const {user, logout} = useContext(AuthContext);
+function ProfileScreen() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>
-        Chào mừng{'\n'}
-        {user.email}
-      </Text>
-      <Button title="Logout" onPress={() => logout()} />
-    </View>
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#ff944d',
+        },
+      }}>
+      <Stack.Screen
+        name="Cá nhân"
+        component={Profile}
+        options={{headerTitleAlign: 'center', headerTintColor: 'white'}}
+      />
+    </Stack.Navigator>
   );
 }
 
-export {HomeStackScreen, BuilDingScreen, FavoriteScreen, Profile};
+export {HomeStackScreen, BuilDingScreen, FavoriteScreen, ProfileScreen};
 
 const styles = StyleSheet.create({
   container: {

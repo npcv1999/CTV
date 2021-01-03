@@ -2,7 +2,6 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import BottomTab from '../Component/BottomTab';
 import {NavigationContainer} from '@react-navigation/native';
-import ButtonSocial from '../Screens/useContext';
 
 const Stack = createStackNavigator();
 export default function HomeStack() {

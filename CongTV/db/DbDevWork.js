@@ -5,12 +5,13 @@ import {
   StyleSheet,
   View,
   FlatList,
-  Image,
   TouchableOpacity,
   Linking,
+  ActivityIndicator,
 } from 'react-native';
 import Loading from '../Component/Loading';
 import Icon from 'react-native-vector-icons/AntDesign';
+import {Image} from 'react-native-elements';
 
 export default class DbDevWork extends React.Component {
   constructor(props) {
@@ -29,7 +30,8 @@ export default class DbDevWork extends React.Component {
           <View style={styles.img}>
             <Image
               source={{uri: obj.item.logo}}
-              style={{width: 60, height: 60}}></Image>
+              style={{width: 60, height: 60}}
+              PlaceholderContent={<ActivityIndicator />}></Image>
           </View>
           <View style={styles.detail}>
             <View style={styles.info}>
@@ -111,19 +113,23 @@ export default class DbDevWork extends React.Component {
     }
     return (
       <View style={styles.MainContainer}>
-        <TextInput
-          style={styles.textInput}
-          onChangeText={(text) => this.searchData(text)}
-          value={this.state.text}
-          underlineColorAndroid="transparent"
-          placeholder="Tìm kiếm ..."
-        />
+        <View style={styles.textInput}>
+          <Icon name="search1" size={20}></Icon>
+          <TextInput
+            onChangeText={(text) => this.searchData(text)}
+            value={this.state.text}
+            underlineColorAndroid="transparent"
+            placeholder="Tìm kiếm ..."
+          />
+        </View>
+
         <FlatList
           extraData={this.state}
           data={this.state.data}
           renderItem={this.renderItem1}
           // ListEmptyComponent={this.ListEmptyComponent}
           keyExtractor={this.keyExtractor}
+          ListEmptyComponent={this.ListEmptyComponent}
           ItemSeparatorComponent={this.ItemSeparatorComponent}
         />
       </View>
@@ -139,8 +145,10 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   textInput: {
-    textAlign: 'center',
-    height: 42,
+    alignItems: 'center',
+    paddingLeft: 10,
+    flexDirection: 'row',
+    height: 40,
     borderWidth: 1,
     borderColor: '#009688',
     borderRadius: 8,
