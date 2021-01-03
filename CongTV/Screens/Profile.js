@@ -1,9 +1,11 @@
-import React, {useContext} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import React, {useContext, useState} from 'react';
+import {StyleSheet, Text, View, Button, TouchableOpacity} from 'react-native';
 import {AuthContext} from '../navigation/AuthProvider';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {Avatar, Divider} from 'react-native-elements';
+import DialogLogOut from '../Component/DialogLogOut';
 const Profile = () => {
+  const [visible, setVisible] = useState(false);
   const {user, logout} = useContext(AuthContext);
   return (
     <View style={styles.container}>
@@ -27,10 +29,7 @@ const Profile = () => {
       </View>
 
       <View style={styles.viewLogOut}>
-        <TouchableOpacity style={styles.btnlogout} onPress={() => logout()}>
-          <Icon name="logout" size={25} color="white"></Icon>
-          <Text style={styles.txtLogout}>Đăng xuất</Text>
-        </TouchableOpacity>
+        <DialogLogOut></DialogLogOut>
       </View>
     </View>
   );
@@ -70,23 +69,5 @@ const styles = StyleSheet.create({
   },
   space: {
     height: 2,
-  },
-  btnlogout: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
-    padding: 5,
-    borderWidth: 0.5,
-    borderRadius: 5,
-    borderColor: 'white',
-    backgroundColor: '#f2610d',
-    color: 'white',
-    height: 'auto',
-    width: 'auto',
-  },
-  txtLogout: {
-    marginLeft: 10,
-    fontSize: 16,
-    color: 'white',
   },
 });
