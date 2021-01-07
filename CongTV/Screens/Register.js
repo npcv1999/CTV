@@ -9,7 +9,7 @@ import {
   Alert,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
-import ViewBtn from '../Component/Button';
+import ViewBtn from '../Component/ViewBtn';
 import firebase from '../db/firebase';
 export default class Register extends React.Component {
   constructor(props) {

@@ -42,13 +42,14 @@ export default class DbDevWork extends React.Component {
                 <Text style={styles.title}>{obj.item.title}</Text>
                 <Text style={styles.tag}>Công ty:</Text>
                 <Text style={styles.text}>{obj.item.company}</Text>
-                <Text style={styles.tag}>Mức lương</Text>
+                <Text style={styles.tag}>Mô tả:</Text>
+                <Text numberOfLines={4} style={styles.description}>
+                  {obj.item.description}
+                </Text>
+                <Text style={styles.cpn}>Mức lương:</Text>
                 <Text style={styles.money}>{obj.item.luong}</Text>
               </TouchableOpacity>
             </View>
-            <TouchableOpacity style={styles.heart}>
-              <Icon name="hearto" size={20} color="#ff0066"></Icon>
-            </TouchableOpacity>
           </View>
         </View>
       </>
@@ -189,21 +190,32 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: 'auto',
-    fontSize: 16,
-    color: 'red',
+    fontSize: 18,
+    color: 'black',
     marginTop: 10,
     marginBottom: 10,
     borderBottomWidth: 0.5,
+    borderBottomColor: 'blue',
+    fontWeight: 'bold',
   },
-  text: {
+  description: {
     fontSize: 12,
     textAlign: 'auto',
   },
+  text: {
+    fontSize: 14,
+    textAlign: 'auto',
+  },
   tag: {
-    fontWeight: 'bold',
+    fontWeight: '700',
+  },
+  cpn: {
+    fontWeight: '600',
+    marginVertical: 5,
+    color: 'green',
   },
   money: {
-    color: 'blue',
+    color: '#fe0e55',
   },
   loading: {
     flex: 1,

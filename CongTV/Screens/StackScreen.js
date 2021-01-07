@@ -18,7 +18,7 @@ function HomeStackScreen() {
       <Stack.Screen
         name="Danh sách việc từ trang"
         component={ListCrawl}
-        options={{headerTitleAlign: 'center', headerTintColor: 'white'}}
+        options={{headerTintColor: 'white'}}
       />
     </Stack.Navigator>
   );
@@ -26,6 +26,7 @@ function HomeStackScreen() {
 function BuilDingScreen() {
   return (
     <Stack.Navigator
+      headerMode="none"
       screenOptions={{
         headerStyle: {
           backgroundColor: '#39ac39',
@@ -34,7 +35,7 @@ function BuilDingScreen() {
       <Stack.Screen
         name="Top công ty"
         component={Building}
-        options={{headerTitleAlign: 'center', headerTintColor: 'white'}}
+        options={{headerTintColor: 'white'}}
       />
     </Stack.Navigator>
   );
@@ -44,13 +45,13 @@ function FavoriteScreen() {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#ff66b3',
+          backgroundColor: '#FA3E3E',
         },
       }}>
       <Stack.Screen
         name="Danh sách việc yêu thích"
         component={Profile}
-        options={{headerTitleAlign: 'center', headerTintColor: 'white'}}
+        options={{headerTintColor: 'white'}}
       />
     </Stack.Navigator>
   );
@@ -66,7 +67,7 @@ function ProfileScreen() {
       <Stack.Screen
         name="Cá nhân"
         component={Profile}
-        options={{headerTitleAlign: 'center', headerTintColor: 'white'}}
+        options={{headerTintColor: 'white'}}
       />
     </Stack.Navigator>
   );

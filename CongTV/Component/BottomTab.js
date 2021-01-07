@@ -43,10 +43,10 @@ export default function BottomTab({size = 20}) {
         name="Yêu thích"
         component={FavoriteScreen}
         options={{
-          tabBarLabel: 'Yêu thích',
-          tabBarColor: '#ff66b3',
+          tabBarLabel: 'Thông báo',
+          tabBarColor: '#FA3E3E',
           tabBarIcon: ({color}) => (
-            <Icon name="heart" color={color} size={size} />
+            <Icon name="bell" color={color} size={size} />
           ),
         }}
       />

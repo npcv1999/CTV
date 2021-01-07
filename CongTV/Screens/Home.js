@@ -7,19 +7,39 @@ import {
   Text,
   StatusBar,
   TouchableOpacity,
+  Image,
+  ActivityIndicator,
 } from 'react-native';
 import 'react-native-gesture-handler';
 import DbITviec from '../db/DbITviec';
 import DbDevWork from '../db/DbDevWork';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import MaskedTitle from '../Component/MaskedTitle';
 const Tab = createMaterialTopTabNavigator();
 
 export default function ListCrawl() {
   // const [state, setState] = useState(0);
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="ITViec" component={DbITviec}></Tab.Screen>
-      <Tab.Screen name="DevWork" component={DbDevWork} />
+    <Tab.Navigator
+      tabBarOptions={{
+        activeTintColor: '#0000ff',
+        inactiveTintColor: 'gray',
+        labelStyle: {fontWeight: 'bold'},
+        showLabel: true,
+      }}>
+      <Tab.Screen
+        options={{
+          tabBarLabel: 'ITViec',
+        }}
+        name="ITViec"
+        component={DbITviec}></Tab.Screen>
+      <Tab.Screen
+        options={{
+          tabBarLabel: 'DevWork',
+        }}
+        name="DevWork"
+        component={DbDevWork}
+      />
     </Tab.Navigator>
   );
 }

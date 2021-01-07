@@ -42,6 +42,7 @@ export default class DbITviec extends React.Component {
         <View style={styles.container}>
           <View style={styles.img}>
             <Image
+              resizeMode={'contain'}
               source={{uri: obj.item.logo}}
               style={{width: 60, height: 60}}
               PlaceholderContent={<ActivityIndicator />}></Image>
@@ -57,12 +58,12 @@ export default class DbITviec extends React.Component {
                 <Text style={styles.text}>{obj.item.decription}</Text>
               </TouchableOpacity>
             </View>
-            <TouchableOpacity style={styles.heart} onPress={(e) => this.add(e)}>
+            {/* <TouchableOpacity style={styles.heart} onPress={(e) => this.add(e)}>
               <Icon
                 name={this.state.favorite ? 'heart' : 'hearto'}
                 size={20}
                 color="#ff0066"></Icon>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
         </View>
       </>
@@ -211,6 +212,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     flex: 1 / 6,
+    marginRight: 5,
   },
   info: {
     flex: 1,
@@ -218,11 +220,13 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: 'auto',
-    fontSize: 16,
-    color: 'red',
+    fontSize: 18,
+    color: 'black',
+    fontWeight: 'bold',
     marginTop: 10,
     marginBottom: 10,
     borderBottomWidth: 0.5,
+    borderBottomColor: 'blue',
   },
   text: {
     fontSize: 12,
@@ -231,6 +235,7 @@ const styles = StyleSheet.create({
   tag: {
     fontWeight: 'bold',
     marginBottom: 5,
+    color: 'green',
   },
   heart: {
     alignSelf: 'flex-end',

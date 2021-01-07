@@ -1,8 +1,16 @@
 import React, {useState, useContext} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
 import {AuthContext} from '../navigation/AuthProvider';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Dialog from 'react-native-dialog';
+const WIDTH = Dimensions.get('window').width;
+const HEIGHT = Dimensions.get('window').height;
 const DialogLogOut = () => {
   const [visible, setVisible] = useState(false);
   const {logout} = useContext(AuthContext);
@@ -21,9 +29,9 @@ const DialogLogOut = () => {
     setVisible(false);
   };
   return (
-    <View style={styles.container}>
+    <>
       <TouchableOpacity style={styles.btnlogout} onPress={showDialog}>
-        <Icon name="logout" size={25} color="white"></Icon>
+        <Icon name="logout" size={30} color="white"></Icon>
         <Text style={styles.txtLogout}>Đăng xuất</Text>
       </TouchableOpacity>
       <Dialog.Container visible={visible}>
@@ -34,33 +42,27 @@ const DialogLogOut = () => {
         <Dialog.Button label="Đăng xuất" onPress={handleDelete} />
         <Dialog.Button label="Hủy" onPress={handleCancel} />
       </Dialog.Container>
-    </View>
+    </>
   );
 };
 export default DialogLogOut;
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   btnlogout: {
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
-    padding: 5,
+    padding: 10,
     borderWidth: 0.5,
     borderRadius: 5,
     borderColor: 'white',
     backgroundColor: '#f2610d',
     color: 'white',
-    height: 'auto',
-    width: 'auto',
+    height: HEIGHT / 18,
+    width: WIDTH,
   },
   txtLogout: {
     marginLeft: 10,
-    fontSize: 16,
+    fontSize: 18,
     color: 'white',
   },
 });
