@@ -3,7 +3,8 @@ import {StyleSheet} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import ListCrawl from './Home';
 import Building from '../Screens/Building';
-import Profile from './Profile';
+import StackProfile from '../navigation/StackProfile';
+import notifiapp from './notifiapp';
 
 const Stack = createStackNavigator();
 
@@ -50,7 +51,7 @@ function FavoriteScreen() {
       }}>
       <Stack.Screen
         name="Danh sách việc yêu thích"
-        component={Profile}
+        component={notifiapp}
         options={{headerTintColor: 'white'}}
       />
     </Stack.Navigator>
@@ -66,7 +67,7 @@ function ProfileScreen() {
       }}>
       <Stack.Screen
         name="Cá nhân"
-        component={Profile}
+        component={StackProfile}
         options={{headerTintColor: 'white'}}
       />
     </Stack.Navigator>

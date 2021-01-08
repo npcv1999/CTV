@@ -7,11 +7,15 @@ import {
   Dimensions,
   TextInput,
   TouchableOpacity,
+  FlatList,
+  LogBox,
 } from 'react-native';
-import {FlatList, ScrollView} from 'react-native-gesture-handler';
+import {ScrollView} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Feather';
 import {Avatar, Image} from 'react-native-elements';
-const WIDTH = Dimensions.get('window').width;
+const WIDTH = Dimensions.get('screen').width;
+
+import firebase from '../db/firebase';
 
 export default class DetailBuilding extends React.Component {
   constructor(props) {
@@ -23,11 +27,12 @@ export default class DetailBuilding extends React.Component {
       comments: '',
     };
   }
+
   comments = (text) => {
-    if (text.length > 0) {
-      this.setState({comments: text, disabled: false});
+    if (text.length >= 0) {
+      this.setState({comments: text, disabled: !this.state.disabled});
     } else {
-      this.setState({disabled: true});
+      this.setState({disabled: !this.state.disabled});
     }
   };
   save(index) {
@@ -42,33 +47,43 @@ export default class DetailBuilding extends React.Component {
       body: JSON.stringify({
         comments: this.state.comments,
       }),
+    }).then((response) => {
+      if (response.status == 200) {
+        alert('Gửi đánh giá thành công');
+        this.setState({comments: ''});
+      }
     });
   }
-  componentDidMount() {
-    const url = 'https://congtimviec.firebaseio.com/top/0/comments.json';
-    fetch(url)
-      .then((response) => response.json())
-      .then((json) => {
-        this.setState({data: json, loading: false});
-        console.log(this.state.data);
-      })
-      .catch(function (error) {
-        console.log(
-          'There has been a problem with your fetch operation: ' +
-            error.message,
-        );
-        // ADD THIS THROW error
-        throw error;
+  async componentDidMount() {
+    LogBox.ignoreLogs(['Setting a timer']);
+    LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
+    var user = firebase.auth().currentUser;
+    const route = this.props.route.params;
+    const item = route.item;
+    const index = route.index;
+    const id = index;
+    try {
+      var starCountRef = firebase.database().ref('top/' + id + '/comments');
+      starCountRef.on('value', (childSnapshot) => {
+        const data = [];
+        childSnapshot.forEach((doc) => {
+          data.push({
+            key: doc.key,
+            comments: doc.toJSON().comments,
+          });
+          this.setState({
+            data: data,
+          });
+        });
       });
+    } catch (error) {
+      console.log(error);
+    }
   }
   renderItem = (item) => {
     return (
       <>
-        <View style={styles.container1}>
-          <View style={styles.info}>
-            <Text style={styles.title}>{item.comments}</Text>
-          </View>
-        </View>
+        <Text style={styles.title}>{item.co}</Text>
       </>
     );
   };
@@ -76,14 +91,16 @@ export default class DetailBuilding extends React.Component {
   //Separator
   ItemSeparatorComponent = () => <View style={styles.separator}></View>;
   render() {
+    // const data = this.state.data;
     console.log(this.state.data);
-    // const route = this.props.route.params;
-    // const item = route.item;
-    // const index = route.index;
-    // console.log(route.index);
+    const route = this.props.route.params;
+    const item = route.item;
+    const index = route.index;
+    console.log(route.index);
+
     return (
       <>
-        {/* <ScrollView>
+        <ScrollView>
           <View style={styles.container}>
             <View>
               <Image
@@ -107,20 +124,31 @@ export default class DetailBuilding extends React.Component {
                   Giới thiệu công ty
                 </Text>
                 <Text style={{textAlign: 'justify'}}>{item.content}</Text>
-                {/* <Text>{this.state.dataComment}</Text> */}
-        {/* </View> */}
-        {/* </View>
-          </View> */}
-        {/* </ScrollView> */}
+              </View>
+            </View>
+          </View>
+          <View
+            style={{
+              flex: 1,
+              width: 'auto',
+              height: 'auto',
+              margin: 15,
+            }}>
+            <Text style={{fontStyle: 'italic'}}>Đánh giá</Text>
+            <FlatList
+              data={this.state.data}
+              renderItem={({item, index}) => {
+                return <Text style={styles.title}>{item.comments}</Text>;
+              }}
+              // ListEmptyComponent={this.ListEmptyComponent}
+              keyExtractor={this.keyExtractor}
+            />
+          </View>
+        </ScrollView>
 
-        <FlatList
-          extraData={this.state}
-          data={this.state.data}
-          renderItem={this.renderItem}
-          keyExtractor={this.keyExtractor}></FlatList>
-
-        {/* <View>
+        <View>
           <TextInput
+            value={this.state.comments}
             placeholder="Viết đáng giá..."
             style={styles.comments}
             onChangeText={this.comments}></TextInput>
@@ -134,7 +162,7 @@ export default class DetailBuilding extends React.Component {
             }}>
             <Icon name="send" size={25}></Icon>
           </TouchableOpacity>
-        </View> */}
+        </View>
       </>
     );
   }
@@ -177,46 +205,12 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
   },
   container1: {
-    backgroundColor: 'red',
+    flex: 1,
+    // backgroundColor: 'red',
     //Shadow item
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.18,
-    shadowRadius: 3.67,
-
-    elevation: 2,
-    //
-    padding: 5,
-    height: 'auto',
-    marginLeft: 5,
-    marginRight: 5,
-    flexDirection: 'row',
-    borderRadius: 3.67,
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  img: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 10,
-    flex: 1 / 6,
-  },
-  info: {
-    flex: 1,
-    marginLeft: 10,
   },
   title: {
-    textAlign: 'auto',
-    fontSize: 18,
-    color: 'black',
-    marginTop: 10,
-    marginBottom: 10,
-    borderBottomWidth: 0.5,
-    borderBottomColor: 'blue',
-    fontWeight: 'bold',
+    fontSize: 14,
+    fontWeight: 'normal',
   },
 });

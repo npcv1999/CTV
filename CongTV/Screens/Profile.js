@@ -17,24 +17,7 @@ import notifee from '@notifee/react-native';
 import Shape from '../Component/Shape';
 const W = Dimensions.get('window').width;
 
-const Profile = () => {
-  async function onDisplayNotification() {
-    // Create a channel
-    const channelId = await notifee.createChannel({
-      id: 'default',
-      name: 'Default Channel',
-    });
-    // Display a notification
-    await notifee.displayNotification({
-      title: 'Chào ' + user.displayName,
-      body: 'Bạn có việc làm mới',
-      android: {
-        channelId,
-        setSmallIcon: 'ic_launcher', // optional, defaults to 'ic_launcher'.
-      },
-    });
-  }
-
+const Profile = ({navigation}) => {
   const {user, logout} = useContext(AuthContext);
   return (
     <>
@@ -78,23 +61,18 @@ const Profile = () => {
             }}>
             <Text style={styles.txtAbout}>Thông tin ứng dụng</Text>
           </View>
-
-          <View style={styles.about}>
-            <Text>Chính sách bảo mật</Text>
-            <Icon name="chevron-right" size={25}></Icon>
-          </View>
+          <TouchableOpacity onPress={() => navigation.navigate('Detail')}>
+            <View style={styles.about}>
+              <Text>Chính sách bảo mật</Text>
+              <Icon name="chevron-right" size={25}></Icon>
+            </View>
+          </TouchableOpacity>
           <View style={styles.space}></View>
+          <Text style={{margin: 15}}>Phiên bản ứng dụng ver.0.0.1</Text>
         </Shape>
         <View style={styles.viewLogOut}>
-          {/* <Text style={{margin: 5}}>Phiên bản ứng dụng ver.0.0.1</Text> */}
           <DialogLogOut></DialogLogOut>
         </View>
-        {/* <View>
-          <Button
-            title="Display Notification"
-            onPress={() => onDisplayNotification()}
-          />
-        </View> */}
       </View>
     </>
   );
@@ -176,7 +154,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     margin: 15,
     backgroundColor: 'white',
-    marginLeft: 20,
+    marginLeft: 15,
     flexDirection: 'row',
     alignItems: 'center',
   },

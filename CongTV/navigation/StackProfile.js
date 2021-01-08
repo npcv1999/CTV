@@ -1,20 +1,18 @@
 import React, {Component} from 'react';
 import {StyleSheet} from 'react-native';
 import {createStackNavigator, HeaderTitle} from '@react-navigation/stack';
-import HomeBuilding from '../Component/HomeBuilding';
-import DetailBuilding from '../Component/DetailBuilding';
+
+import Profile from '../Screens/Profile';
+import Sercurity from '../Screens/Sercurity';
 
 const Stack = createStackNavigator();
-export default function Building() {
+export default function StackProfile() {
   return (
-    <Stack.Navigator initialRouteName="Home" headerMode="screen">
-      <Stack.Screen
-        name="Home"
-        component={HomeBuilding}
-        options={{headerTitle: 'Top công ty'}}></Stack.Screen>
+    <Stack.Navigator initialRouteName="Home" headerMode="none">
+      <Stack.Screen name="Home" component={Profile}></Stack.Screen>
       <Stack.Screen
         name="Detail"
-        component={DetailBuilding}
+        component={Sercurity}
         options={{headerTitle: 'Chi tiết công ty'}}></Stack.Screen>
     </Stack.Navigator>
   );

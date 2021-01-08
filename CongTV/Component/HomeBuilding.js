@@ -8,6 +8,7 @@ import {
   Text,
   ActivityIndicator,
 } from 'react-native';
+import Loading from '../Component/Loading';
 import {TextInput} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Feather';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -114,6 +115,9 @@ export default class HomeBuilding extends Component {
   //   );
   // }
   render() {
+    if (this.state.loading) {
+      return <Loading></Loading>;
+    }
     return (
       <FlatList
         numColumns={2}
