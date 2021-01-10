@@ -14,17 +14,6 @@ import messaging from '@react-native-firebase/messaging';
 import Providers from './navigation';
 
 const App = () => {
-  useEffect(() => {
-    const unsubscribe = messaging().onMessage(async (remoteMessage) => {
-      Alert.alert(
-        'A new FCM message arrived!',
-        JSON.stringify(remoteMessage.notification.body),
-        console.log(remoteMessage.notification.body),
-      );
-    });
-
-    return unsubscribe;
-  }, []);
   return (
     <Providers></Providers>
     // <ListCrawl></ListCrawl>

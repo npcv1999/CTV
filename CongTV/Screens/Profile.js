@@ -53,7 +53,7 @@ const Profile = ({navigation}) => {
           <View style={styles.space}></View>
           <View
             style={{
-              marginTop: 30,
+              marginTop: 15,
               justifyContent: 'center',
               margin: 5,
               justifyContent: 'center',
@@ -63,12 +63,37 @@ const Profile = ({navigation}) => {
           </View>
           <TouchableOpacity onPress={() => navigation.navigate('Detail')}>
             <View style={styles.about}>
-              <Text>Chính sách bảo mật</Text>
-              <Icon name="chevron-right" size={25}></Icon>
+              <Text style={{height: 40}}>
+                <Image source={require('../src/images/shield.png')}></Image>
+                Chính sách bảo mật
+              </Text>
+              <Icon name="chevron-right" size={20}></Icon>
             </View>
           </TouchableOpacity>
           <View style={styles.space}></View>
-          <Text style={{margin: 15}}>Phiên bản ứng dụng ver.0.0.1</Text>
+          <TouchableOpacity>
+            <View style={styles.about}>
+              <Text style={{height: 40}}>
+                <Image source={require('../src/images/comments.png')}></Image>
+                Trợ giúp và phản hồi
+              </Text>
+              <Icon name="chevron-right" size={20}></Icon>
+            </View>
+          </TouchableOpacity>
+          <View style={styles.space}></View>
+          <TouchableOpacity>
+            <View style={styles.about}>
+              <Text style={{height: 40}}>
+                <Image source={require('../src/images/reply.png')}></Image>
+                Đánh giá ứng dụng
+              </Text>
+              <Icon name="chevron-right" size={20}></Icon>
+            </View>
+          </TouchableOpacity>
+          <View style={styles.space}></View>
+          <Text style={{margin: 15, marginTop: 85}}>
+            Phiên bản ứng dụng ver.0.0.1
+          </Text>
         </Shape>
         <View style={styles.viewLogOut}>
           <DialogLogOut></DialogLogOut>
@@ -126,6 +151,7 @@ const styles = StyleSheet.create({
     color: '#333333',
   },
   txtAbout: {
+    marginTop: 50,
     fontWeight: 'bold',
     marginLeft: 10,
     fontSize: 16,
@@ -134,10 +160,7 @@ const styles = StyleSheet.create({
   },
   viewLogOut: {
     // flexDirection: 'row',
-    marginBottom: 2,
     backgroundColor: 'white',
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end',
   },
   space: {
     backgroundColor: '#d9d9d9',
@@ -151,10 +174,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   about: {
+    height: 50,
     justifyContent: 'space-between',
-    margin: 15,
     backgroundColor: 'white',
-    marginLeft: 15,
+    marginHorizontal: 15,
     flexDirection: 'row',
     alignItems: 'center',
   },

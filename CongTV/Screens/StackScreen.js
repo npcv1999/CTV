@@ -50,7 +50,7 @@ function FavoriteScreen() {
         },
       }}>
       <Stack.Screen
-        name="Danh sách việc yêu thích"
+        name="Nhận thông báo"
         component={notifiapp}
         options={{headerTintColor: 'white'}}
       />
@@ -60,6 +60,7 @@ function FavoriteScreen() {
 function ProfileScreen() {
   return (
     <Stack.Navigator
+      headerMode="none"
       screenOptions={{
         headerStyle: {
           backgroundColor: '#ff944d',

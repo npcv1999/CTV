@@ -11,11 +11,23 @@ export default function Building() {
       <Stack.Screen
         name="Home"
         component={HomeBuilding}
-        options={{headerTitle: 'Top công ty'}}></Stack.Screen>
+        options={{
+          headerTintColor: 'white',
+          headerTitle: 'Top công ty',
+          headerStyle: {
+            backgroundColor: '#39ac39',
+          },
+        }}></Stack.Screen>
       <Stack.Screen
         name="Detail"
         component={DetailBuilding}
-        options={{headerTitle: 'Chi tiết công ty'}}></Stack.Screen>
+        options={{
+          headerTintColor: 'white',
+          headerTitle: 'Chi tiết công ty',
+          headerStyle: {
+            backgroundColor: '#39ac39',
+          },
+        }}></Stack.Screen>
     </Stack.Navigator>
   );
 }

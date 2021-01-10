@@ -12,8 +12,10 @@ import Loading from '../Component/Loading';
 import {TextInput} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Feather';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {Image} from 'react-native-elements';
+import Quote from 'react-native-vector-icons/FontAwesome5';
+import {Image, Tooltip} from 'react-native-elements';
 const WIDTH = Dimensions.get('window').width;
+const HEIGHT = Dimensions.get('window').height;
 export default class HomeBuilding extends Component {
   constructor(props) {
     super(props);
@@ -62,110 +64,93 @@ export default class HomeBuilding extends Component {
   }
   //Key
   keyExtractor = (item, index) => item.title;
-  //Separator
-  ItemSeparatorComponent = () => <View style={styles.separator}></View>;
 
-  // renderItem({item, index}) {
-  //   return (
-  //     <>
-  //       <View style={styles.item}>
-  //         <Image
-  //           resizeMode={'contain'}
-  //           source={{uri: item.logo}}
-  //           style={styles.img}
-  //           PlaceholderContent={<ActivityIndicator />}></Image>
-  //         <Text style={styles.title}>{item.title}</Text>
-  //         <TouchableOpacity
-  //           onPress={() => this.props.navigation.navigate('Detail')}>
-  //           <View
-  //             style={{
-  //               flexDirection: 'row',
-  //               justifyContent: 'center',
-  //               alignItems: 'center',
-  //             }}>
-  //             <Text style={styles.info}>Chi tiết công ty</Text>
-  //             <AntDesign
-  //               style={styles.info}
-  //               name="doubleright"
-  //               size={14}></AntDesign>
-  //           </View>
-  //         </TouchableOpacity>
-  //         {/* <Text numberOfLines={5} style={styles.text}>
-  //               {description}
-  //             </Text> */}
-  //       </View>
-  //       {/* <TouchableOpacity style={styles.heart}>
-  //             <Icon name="star" size={20} color="#ff0066"></Icon>
-  //           </TouchableOpacity> */}
-  //       {/* <View>
-  //         <TextInput
-  //           style={styles.comments}
-  //           onChangeText={this.comments}></TextInput>
-  //         <TouchableOpacity
-  //           onPress={() => this.save(item, index)}
-  //           style={{
-  //             position: 'absolute',
-  //             top: 10,
-  //             right: 20,
-  //           }}>
-  //           <Icon name="send" size={25}></Icon>
-  //         </TouchableOpacity>
-  //       </View> */}
-  //     </>
-  //   );
-  // }
   render() {
     if (this.state.loading) {
       return <Loading></Loading>;
     }
     return (
-      <FlatList
-        numColumns={2}
-        data={this.state.data}
-        renderItem={({item, index}) => (
-          <View style={styles.item}>
-            <Image
-              resizeMode={'contain'}
-              source={{uri: item.logo}}
-              style={styles.img}
-              PlaceholderContent={<ActivityIndicator />}></Image>
-            <Text style={styles.title}>{item.title}</Text>
-            <TouchableOpacity
-              onPress={() =>
-                this.props.navigation.navigate('Detail', {index, item})
-              }>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <Text style={styles.info}>Chi tiết công ty</Text>
-                <AntDesign
-                  style={styles.info}
-                  name="doubleright"
-                  size={14}></AntDesign>
+      <>
+        <View
+          style={{
+            margin: 5,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <Tooltip
+            width={WIDTH - 20}
+            height={'auto'}
+            backgroundColor="#bfbfbf"
+            popover={
+              <View>
+                <Quote name="quote-left" size={30}></Quote>
+                <Text style={{textAlign: 'justify'}}>
+                  Các Công ty Công nghệ lọt vào danh sách này dựa trên những
+                  tiêu chí Chất lượng sản phẩm - Môi trường làm việc - Chế độ
+                  đãi ngộ - Khả năng học hỏi do TopCV đánh giá, để đảm bảo rằng
+                  đây là nơi làm việc tốt nhất dành cho bạn.
+                </Text>
               </View>
-            </TouchableOpacity>
-            {/* <Text numberOfLines={5} style={styles.text}>
+            }>
+            <Text
+              style={{
+                backgroundColor: 'yellow',
+                alignItems: 'center',
+                fontStyle: 'italic',
+              }}>
+              Chọn mình trước nếu bạn chưa đọc nhé!!!
+            </Text>
+          </Tooltip>
+        </View>
+        <View style={{flex: 1, marginHorizontal: 5}}>
+          <FlatList
+            numColumns={2}
+            data={this.state.data}
+            renderItem={({item, index}) => (
+              <View style={styles.item}>
+                <Image
+                  resizeMode={'contain'}
+                  source={{uri: item.logo}}
+                  style={styles.img}
+                  PlaceholderContent={<ActivityIndicator />}></Image>
+                <Text style={styles.title}>{item.title}</Text>
+                <TouchableOpacity
+                  onPress={() =>
+                    this.props.navigation.navigate('Detail', {index, item})
+                  }>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <Text style={styles.info}>Chi tiết công ty</Text>
+                    <AntDesign
+                      style={styles.info}
+                      name="doubleright"
+                      size={14}></AntDesign>
+                  </View>
+                </TouchableOpacity>
+                {/* <Text numberOfLines={5} style={styles.text}>
                 {description}
               </Text> */}
-          </View>
-        )}
-        keyExtractor={this.keyExtractor}
-        ItemSeparatorComponent={this.ItemSeparatorComponent}></FlatList>
+              </View>
+            )}
+            keyExtractor={this.keyExtractor}></FlatList>
+        </View>
+      </>
     );
   }
 }
 const styles = StyleSheet.create({
   item: {
-    padding: 10,
+    padding: 5,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
     margin: 8,
-    height: WIDTH / 1.2,
+    height: HEIGHT / 2.4,
     marginHorizontal: 5,
     shadowColor: '#000',
     shadowOffset: {

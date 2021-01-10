@@ -8,12 +8,26 @@ import Sercurity from '../Screens/Sercurity';
 const Stack = createStackNavigator();
 export default function StackProfile() {
   return (
-    <Stack.Navigator initialRouteName="Home" headerMode="none">
-      <Stack.Screen name="Home" component={Profile}></Stack.Screen>
+    <Stack.Navigator initialRouteName="Home">
+      <Stack.Screen
+        name="Home"
+        component={Profile}
+        options={{
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: '#ff944d',
+          },
+        }}></Stack.Screen>
       <Stack.Screen
         name="Detail"
         component={Sercurity}
-        options={{headerTitle: 'Chi tiết công ty'}}></Stack.Screen>
+        options={{
+          headerTintColor: 'white',
+          headerTitle: 'Chi tiết công ty',
+          headerStyle: {
+            backgroundColor: '#ff944d',
+          },
+        }}></Stack.Screen>
     </Stack.Navigator>
   );
 }

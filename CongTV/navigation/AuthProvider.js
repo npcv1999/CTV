@@ -19,7 +19,7 @@ export const AuthProvider = ({children}) => {
             // Get the users ID token
             await GoogleSignin.hasPlayServices();
             const {accessToken, idToken} = await GoogleSignin.signIn();
-            alert('Đăng nhập thành công');
+
             // Create a Google credential with the token
             const googleCredential = auth.GoogleAuthProvider.credential(
               idToken,
@@ -28,6 +28,7 @@ export const AuthProvider = ({children}) => {
 
             // Sign-in the user with the credential
             await auth().signInWithCredential(googleCredential);
+            await alert('Đăng nhập thành công');
           } catch (error) {
             if (error.code === statusCodes.SIGN_IN_CANCELLED) {
               // user cancelled the login flow
@@ -54,23 +55,22 @@ export const AuthProvider = ({children}) => {
             if (result.isCancelled) {
               alert('Hủy đăng nhập');
             } else {
-              alert('Đăng nhập thành công');
+              await alert('Đăng nhập thành công');
+              // Once signed in, get the users AccesToken
+              const data = await AccessToken.getCurrentAccessToken();
+
+              if (!data) {
+                throw 'Something went wrong obtaining access token';
+              }
+
+              // Create a Firebase credential with the AccessToken
+              const facebookCredential = auth.FacebookAuthProvider.credential(
+                data.accessToken,
+              );
+
+              // Sign-in the user with the credential
+              await auth().signInWithCredential(facebookCredential);
             }
-
-            // Once signed in, get the users AccesToken
-            const data = await AccessToken.getCurrentAccessToken();
-
-            if (!data) {
-              throw 'Something went wrong obtaining access token';
-            }
-
-            // Create a Firebase credential with the AccessToken
-            const facebookCredential = auth.FacebookAuthProvider.credential(
-              data.accessToken,
-            );
-
-            // Sign-in the user with the credential
-            await auth().signInWithCredential(facebookCredential);
           } catch (error) {
             console.log({error});
           }
