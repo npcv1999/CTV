@@ -28,7 +28,7 @@ export const AuthProvider = ({children}) => {
 
             // Sign-in the user with the credential
             await auth().signInWithCredential(googleCredential);
-            await alert('Đăng nhập thành công');
+            alert('Đăng nhập thành công');
           } catch (error) {
             if (error.code === statusCodes.SIGN_IN_CANCELLED) {
               // user cancelled the login flow

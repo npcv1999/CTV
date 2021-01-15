@@ -31,7 +31,7 @@ const DialogLogOut = () => {
   return (
     <>
       <TouchableOpacity style={styles.btnlogout} onPress={showDialog}>
-        <Icon name="logout" size={30} color="white"></Icon>
+        <Icon name="logout" size={16} color="white"></Icon>
         <Text style={styles.txtLogout}>Đăng xuất</Text>
       </TouchableOpacity>
       <Dialog.Container visible={visible}>
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     color: 'white',
     // height: HEIGHT / 18,
     // width: WIDTH,
-    borderRadius: 20,
+    borderRadius: 6,
     padding: 10,
     elevation: 5,
     margin: 10,

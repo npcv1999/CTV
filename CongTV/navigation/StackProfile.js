@@ -4,6 +4,7 @@ import {createStackNavigator, HeaderTitle} from '@react-navigation/stack';
 
 import Profile from '../Screens/Profile';
 import Sercurity from '../Screens/Sercurity';
+import FeedBack from '../Screens/FeedBack';
 
 const Stack = createStackNavigator();
 export default function StackProfile() {
@@ -24,6 +25,16 @@ export default function StackProfile() {
         options={{
           headerTintColor: 'white',
           headerTitle: 'Chi tiết công ty',
+          headerStyle: {
+            backgroundColor: '#ff944d',
+          },
+        }}></Stack.Screen>
+      <Stack.Screen
+        name="Contact"
+        component={FeedBack}
+        options={{
+          headerTintColor: 'white',
+          headerTitle: 'Liên hệ',
           headerStyle: {
             backgroundColor: '#ff944d',
           },

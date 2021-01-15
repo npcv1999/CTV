@@ -12,7 +12,7 @@ import {
 import Loading from '../Component/Loading';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {Image} from 'react-native-elements';
-
+import RNAnimated from 'react-native-animated-component';
 export default class DbDevWork extends React.Component {
   constructor(props) {
     super(props);
@@ -26,32 +26,34 @@ export default class DbDevWork extends React.Component {
   renderItem1 = (obj) => {
     return (
       <>
-        <View style={styles.container}>
-          <View style={styles.img}>
-            <Image
-              source={{uri: obj.item.logo}}
-              style={{width: 60, height: 60}}
-              PlaceholderContent={<ActivityIndicator />}></Image>
-          </View>
-          <View style={styles.detail}>
-            <View style={styles.info}>
-              <TouchableOpacity
-                onPress={() => {
-                  Linking.openURL(obj.item.href);
-                }}>
-                <Text style={styles.title}>{obj.item.title}</Text>
-                <Text style={styles.tag}>Công ty:</Text>
-                <Text style={styles.text}>{obj.item.company}</Text>
-                <Text style={styles.tag}>Mô tả:</Text>
-                <Text numberOfLines={4} style={styles.description}>
-                  {obj.item.description}
-                </Text>
-                <Text style={styles.cpn}>Mức lương:</Text>
-                <Text style={styles.money}>{obj.item.luong}</Text>
-              </TouchableOpacity>
+        <RNAnimated appearFrom="bottom" animationDuration={1000}>
+          <View style={styles.container}>
+            <View style={styles.img}>
+              <Image
+                source={{uri: obj.item.logo}}
+                style={{width: 60, height: 60}}
+                PlaceholderContent={<ActivityIndicator />}></Image>
+            </View>
+            <View style={styles.detail}>
+              <View style={styles.info}>
+                <TouchableOpacity
+                  onPress={() => {
+                    Linking.openURL(obj.item.href);
+                  }}>
+                  <Text style={styles.title}>{obj.item.title}</Text>
+                  <Text style={styles.tag}>Công ty:</Text>
+                  <Text style={styles.text}>{obj.item.company}</Text>
+                  <Text style={styles.tag}>Mô tả:</Text>
+                  <Text numberOfLines={4} style={styles.description}>
+                    {obj.item.description}
+                  </Text>
+                  <Text style={styles.cpn}>Mức lương:</Text>
+                  <Text style={styles.money}>{obj.item.luong}</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
-        </View>
+        </RNAnimated>
       </>
     );
   };

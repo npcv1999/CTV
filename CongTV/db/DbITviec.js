@@ -12,8 +12,8 @@ import {
 import Icon from 'react-native-vector-icons/AntDesign';
 import Loading from '../Component/Loading';
 import {Image} from 'react-native-elements';
-import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
-
+import RNAnimated from 'react-native-animated-component';
+// import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 export default class DbITviec extends React.Component {
   constructor(props) {
     super(props);
@@ -39,33 +39,35 @@ export default class DbITviec extends React.Component {
     // const {favorite} =this.state;
     return (
       <>
-        <View style={styles.container}>
-          <View style={styles.img}>
-            <Image
-              resizeMode={'contain'}
-              source={{uri: obj.item.logo}}
-              style={{width: 60, height: 60}}
-              PlaceholderContent={<ActivityIndicator />}></Image>
-          </View>
-          <View style={styles.detail}>
-            <View style={styles.info}>
-              <TouchableOpacity
-                onPress={() => {
-                  Linking.openURL(obj.item.href);
-                }}>
-                <Text style={styles.title}>{obj.item.title}</Text>
-                <Text style={styles.tag}>Description:</Text>
-                <Text style={styles.text}>{obj.item.decription}</Text>
-              </TouchableOpacity>
+        <RNAnimated appearFrom="bottom" animationDuration={1000}>
+          <View style={styles.container}>
+            <View style={styles.img}>
+              <Image
+                resizeMode={'contain'}
+                source={{uri: obj.item.logo}}
+                style={{width: 60, height: 60}}
+                PlaceholderContent={<ActivityIndicator />}></Image>
             </View>
-            {/* <TouchableOpacity style={styles.heart} onPress={(e) => this.add(e)}>
+            <View style={styles.detail}>
+              <View style={styles.info}>
+                <TouchableOpacity
+                  onPress={() => {
+                    Linking.openURL(obj.item.href);
+                  }}>
+                  <Text style={styles.title}>{obj.item.title}</Text>
+                  <Text style={styles.tag}>Description:</Text>
+                  <Text style={styles.text}>{obj.item.decription}</Text>
+                </TouchableOpacity>
+              </View>
+              {/* <TouchableOpacity style={styles.heart} onPress={(e) => this.add(e)}>
               <Icon
                 name={this.state.favorite ? 'heart' : 'hearto'}
                 size={20}
                 color="#ff0066"></Icon>
             </TouchableOpacity> */}
+            </View>
           </View>
-        </View>
+        </RNAnimated>
       </>
     );
   };
@@ -155,13 +157,11 @@ export default class DbITviec extends React.Component {
           />
         </View>
         <FlatList
-          extraData={this.state}
           data={this.state.data}
           renderItem={this.renderItem}
           ListEmptyComponent={this.ListEmptyComponent}
           keyExtractor={this.keyExtractor}
-          ItemSeparatorComponent={this.ItemSeparatorComponent}
-        />
+          ItemSeparatorComponent={this.ItemSeparatorComponent}></FlatList>
       </View>
     );
   }

@@ -65,17 +65,17 @@ const Profile = ({navigation}) => {
             <View style={styles.about}>
               <Text style={{height: 40}}>
                 <Image source={require('../src/images/shield.png')}></Image>
-                Chính sách bảo mật
+                {'\t'}Chính sách bảo mật
               </Text>
               <Icon name="chevron-right" size={20}></Icon>
             </View>
           </TouchableOpacity>
           <View style={styles.space}></View>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('Contact')}>
             <View style={styles.about}>
               <Text style={{height: 40}}>
                 <Image source={require('../src/images/comments.png')}></Image>
-                Trợ giúp và phản hồi
+                {'\t'}Trợ giúp và phản hồi
               </Text>
               <Icon name="chevron-right" size={20}></Icon>
             </View>
@@ -85,7 +85,7 @@ const Profile = ({navigation}) => {
             <View style={styles.about}>
               <Text style={{height: 40}}>
                 <Image source={require('../src/images/reply.png')}></Image>
-                Đánh giá ứng dụng
+                {'\t'}Đánh giá ứng dụng
               </Text>
               <Icon name="chevron-right" size={20}></Icon>
             </View>
@@ -154,9 +154,8 @@ const styles = StyleSheet.create({
     marginTop: 50,
     fontWeight: 'bold',
     marginLeft: 10,
-    fontSize: 16,
+    fontSize: 18,
     color: '#333333',
-    borderBottomWidth: 0.3,
   },
   viewLogOut: {
     // flexDirection: 'row',

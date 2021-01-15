@@ -21,11 +21,11 @@ import Comment from 'react-native-vector-icons/MaterialCommunityIcons';
 const WIDTH = Dimensions.get('screen').width;
 
 import firebase from '../db/firebase';
+import LoadingComments from './LoadingComments';
 
 export class BtnComment extends React.Component {
   render() {
     const {onPress, btn} = this.props;
-    console.log(btn);
     if (!btn)
       return (
         <TouchableHighlight style={styles.openButton} onPress={onPress}>
@@ -53,6 +53,7 @@ export default class DetailBuilding extends React.Component {
       showBtn: false,
       modalVisible: false,
       error: '',
+      loading: true,
     };
   }
   setModalVisible = (visible) => {
@@ -143,6 +144,15 @@ export default class DetailBuilding extends React.Component {
   keyExtractor = (item, index) => index.toString();
   //Separator
   ItemSeparatorComponent = () => <View style={styles.separator}></View>;
+  //empty
+  ListEmptyComponent = () => {
+    return (
+      <View style={styles.viewEmpty}>
+        <Text style={styles.textEmpty}>Chưa có đánh giá!{'\n'}</Text>
+      </View>
+    );
+  };
+
   render() {
     // const data = this.state.data;
     console.log(this.state.data);
@@ -212,7 +222,7 @@ export default class DetailBuilding extends React.Component {
                   </View>
                 );
               }}
-              // ListEmptyComponent={this.ListEmptyComponent}
+              ListEmptyComponent={this.ListEmptyComponent}
               keyExtractor={this.keyExtractor}
             />
           </View>

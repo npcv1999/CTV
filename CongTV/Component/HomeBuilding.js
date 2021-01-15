@@ -79,7 +79,7 @@ export default class HomeBuilding extends Component {
           }}>
           <Tooltip
             width={WIDTH - 20}
-            height={'auto'}
+            height={150}
             backgroundColor="#bfbfbf"
             popover={
               <View>
@@ -87,8 +87,8 @@ export default class HomeBuilding extends Component {
                 <Text style={{textAlign: 'justify'}}>
                   Các Công ty Công nghệ lọt vào danh sách này dựa trên những
                   tiêu chí Chất lượng sản phẩm - Môi trường làm việc - Chế độ
-                  đãi ngộ - Khả năng học hỏi do TopCV đánh giá, để đảm bảo rằng
-                  đây là nơi làm việc tốt nhất dành cho bạn.
+                  đãi ngộ - Khả năng học hỏi do CổngTìmViệc đánh giá, để đảm bảo
+                  rằng đây là nơi làm việc tốt nhất dành cho bạn.
                 </Text>
               </View>
             }>
