@@ -16,6 +16,7 @@ import Quote from 'react-native-vector-icons/FontAwesome5';
 import {Image, Tooltip} from 'react-native-elements';
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
+import firebase from '../db/firebase';
 export default class HomeBuilding extends Component {
   constructor(props) {
     super(props);
@@ -47,11 +48,16 @@ export default class HomeBuilding extends Component {
   //Key
   // Fetch data
   componentDidMount() {
+    // var ref = firebase.database().ref('list');
+    // ref.once('value').then(function (snapshot) {
+    //   console.log(snapshot.numChildren());
+    // });
     const url = 'https://congtimviec.firebaseio.com/top.json';
     fetch(url)
       .then((response) => response.json())
       .then((json) => {
         this.setState({data: json, loading: false});
+        console.log(json);
       })
       .catch(function (error) {
         console.log(
@@ -131,6 +137,23 @@ export default class HomeBuilding extends Component {
                       size={14}></AntDesign>
                   </View>
                 </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() =>
+                    this.props.navigation.navigate('ListJob', {index, item})
+                  }>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <Text style={styles.info}>Việc tuyển dụng</Text>
+                    <AntDesign
+                      style={styles.info}
+                      name="doubleright"
+                      size={14}></AntDesign>
+                  </View>
+                </TouchableOpacity>
                 {/* <Text numberOfLines={5} style={styles.text}>
                 {description}
               </Text> */}
@@ -164,7 +187,7 @@ const styles = StyleSheet.create({
   },
   img: {
     width: 100,
-    height: 150,
+    height: 100,
   },
   title: {
     flex: 0.5,

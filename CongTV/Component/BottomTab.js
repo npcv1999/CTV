@@ -10,6 +10,7 @@ import {
   ProfileScreen,
 } from '../Screens/StackScreen';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
+import Job from './Job';
 const Tab = createMaterialBottomTabNavigator();
 export default function BottomTab({size = 20}) {
   return (
@@ -19,12 +20,23 @@ export default function BottomTab({size = 20}) {
       barStyle={{backgroundColor: 'white'}}>
       <Tab.Screen
         name="Home"
-        component={HomeStackScreen}
+        component={Job}
         options={{
           tabBarLabel: 'Trang chủ',
           tabBarColor: '#3399ff',
           tabBarIcon: ({color}) => (
             <Icon name="home" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Job"
+        component={HomeStackScreen}
+        options={{
+          tabBarLabel: 'Việc từ trang',
+          tabBarColor: '#39ac39',
+          tabBarIcon: ({color}) => (
+            <Icon name="pager" color={color} size={size} />
           ),
         }}
       />

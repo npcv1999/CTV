@@ -3,6 +3,7 @@ import {StyleSheet} from 'react-native';
 import {createStackNavigator, HeaderTitle} from '@react-navigation/stack';
 import HomeBuilding from '../Component/HomeBuilding';
 import DetailBuilding from '../Component/DetailBuilding';
+import ListJob from '../Component/ListJob';
 
 const Stack = createStackNavigator();
 export default function Building() {
@@ -24,6 +25,16 @@ export default function Building() {
         options={{
           headerTintColor: 'white',
           headerTitle: 'Chi tiết công ty',
+          headerStyle: {
+            backgroundColor: '#39ac39',
+          },
+        }}></Stack.Screen>
+      <Stack.Screen
+        name="ListJob"
+        component={ListJob}
+        options={{
+          headerTintColor: 'white',
+          headerTitle: 'Danh sách việc',
           headerStyle: {
             backgroundColor: '#39ac39',
           },

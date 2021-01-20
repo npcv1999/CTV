@@ -14,6 +14,7 @@ import Loading from '../Component/Loading';
 import {Image} from 'react-native-elements';
 import RNAnimated from 'react-native-animated-component';
 // import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
+
 export default class DbITviec extends React.Component {
   constructor(props) {
     super(props);
@@ -113,6 +114,13 @@ export default class DbITviec extends React.Component {
       });
   }
   //Search item
+  storeData = async (text) => {
+    try {
+      await AsyncStorage.setItem('@search', text);
+    } catch (e) {
+      // saving error
+    }
+  };
   searchData(text) {
     const newData = this.arrayHolder.filter((item) => {
       const itemData = item.title.toUpperCase();
