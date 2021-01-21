@@ -83,7 +83,7 @@ export default class HomeBuilding extends Component {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <Tooltip
+          {/* <Tooltip
             width={WIDTH - 20}
             height={150}
             backgroundColor="#bfbfbf"
@@ -106,7 +106,7 @@ export default class HomeBuilding extends Component {
               }}>
               Chọn mình trước nếu bạn chưa đọc nhé!!!
             </Text>
-          </Tooltip>
+          </Tooltip> */}
         </View>
         <View style={{flex: 1, marginHorizontal: 5}}>
           <FlatList
@@ -147,7 +147,7 @@ export default class HomeBuilding extends Component {
                       justifyContent: 'center',
                       alignItems: 'center',
                     }}>
-                    <Text style={styles.info}>Việc tuyển dụng</Text>
+                    <Text style={styles.info}>Việc làm</Text>
                     <AntDesign
                       style={styles.info}
                       name="doubleright"

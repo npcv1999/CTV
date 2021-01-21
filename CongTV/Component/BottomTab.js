@@ -34,7 +34,7 @@ export default function BottomTab({size = 20}) {
         component={HomeStackScreen}
         options={{
           tabBarLabel: 'Việc từ trang',
-          tabBarColor: '#39ac39',
+          tabBarColor: '#ad33ff',
           tabBarIcon: ({color}) => (
             <Icon name="pager" color={color} size={size} />
           ),

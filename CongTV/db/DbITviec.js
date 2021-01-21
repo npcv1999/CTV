@@ -56,8 +56,8 @@ export default class DbITviec extends React.Component {
                     Linking.openURL(obj.item.href);
                   }}>
                   <Text style={styles.title}>{obj.item.title}</Text>
-                  <Text style={styles.tag}>Description:</Text>
-                  <Text style={styles.text}>{obj.item.decription}</Text>
+                  <Text style={styles.tag}>Mức lương:</Text>
+                  <Text style={styles.text}>{obj.item.slary}</Text>
                 </TouchableOpacity>
               </View>
               {/* <TouchableOpacity style={styles.heart} onPress={(e) => this.add(e)}>
@@ -161,7 +161,7 @@ export default class DbITviec extends React.Component {
             onChangeText={(text) => this.searchData(text)}
             value={this.state.text}
             underlineColorAndroid="transparent"
-            placeholder="Tìm kiếm ..."
+            placeholder="Tìm kiếm ...                                                                       "
           />
         </View>
         <FlatList
@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
   },
   info: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: 'flex-start',
   },
   title: {
     textAlign: 'auto',
@@ -238,6 +238,8 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 12,
+    marginBottom: 5,
+    color: 'red',
     textAlign: 'auto',
   },
   tag: {

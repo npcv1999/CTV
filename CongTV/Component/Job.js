@@ -14,6 +14,7 @@ import {
 import Icon from 'react-native-vector-icons/AntDesign';
 import firebase from '../db/firebase';
 import Loading from './Loading';
+import MaskedTitle from './MaskedTitle';
 export default class Job extends Component {
   constructor(props) {
     super(props);
@@ -76,7 +77,7 @@ export default class Job extends Component {
                 <View style={{justifyContent: 'center'}}>
                   <View
                     style={{
-                      flexDirection: 'column',
+                      flexDirection: 'row',
                     }}>
                     <Text style={styles.cpn}>Mức lương:</Text>
                     <Text style={styles.money}>{obj.item.salary}</Text>
@@ -126,13 +127,16 @@ export default class Job extends Component {
     }
     return (
       <View style={styles.MainContainer}>
+        <MaskedTitle style={styles.titleSearchJb}>
+          {' '}
+          Tìm kiếm việc làm
+        </MaskedTitle>
         <View style={styles.textInput}>
           <Icon name="search1" size={20}></Icon>
           <TextInput
             onChangeText={(text) => this.searchData(text)}
             value={this.state.text}
-            underlineColorAndroid="transparent"
-            placeholder="Tìm kiếm ..."
+            placeholder="Tìm kiếm ...                                                                       "
           />
         </View>
 
@@ -141,6 +145,7 @@ export default class Job extends Component {
           ListEmptyComponent={this.ListEmptyComponent}
           renderItem={this.renderItem}
           keyExtractor={this.keyExtractor}
+          ItemSeparatorComponent={this.ItemSeparatorComponent}
         />
       </View>
     );
@@ -236,10 +241,15 @@ const styles = StyleSheet.create({
   cpn: {
     fontWeight: '600',
     color: 'green',
-    marginRight: 10,
+    marginRight: 5,
   },
   money: {
-    marginLeft: 5,
     color: '#fe0e55',
+  },
+  titleSearchJb: {
+    fontSize: 25,
+    textAlign: 'center',
+    marginBottom: 10,
+    fontWeight: '700',
   },
 });

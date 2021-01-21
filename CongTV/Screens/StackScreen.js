@@ -13,7 +13,7 @@ function HomeStackScreen() {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#3399ff',
+          backgroundColor: '#ad33ff',
         },
       }}>
       <Stack.Screen

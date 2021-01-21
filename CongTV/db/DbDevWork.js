@@ -135,7 +135,7 @@ export default class DbDevWork extends React.Component {
             onChangeText={(text) => this.searchData(text)}
             value={this.state.text}
             underlineColorAndroid="transparent"
-            placeholder="Tìm kiếm ..."
+            placeholder="Tìm kiếm ...                                                                       "
           />
         </View>
 

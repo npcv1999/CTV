@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Dimensions} from 'react-native';
+import {Dimensions, ScrollView} from 'react-native';
 import {
   Text,
   StyleSheet,
@@ -16,6 +16,7 @@ import {
 } from 'react-native-image-header-scroll-view';
 import firebase from '../db/firebase';
 const WIDTH = Dimensions.get('window').width;
+const HEIGHT = Dimensions.get('window').height;
 export default class ListJob extends Component {
   constructor(props) {
     super(props);
@@ -95,7 +96,7 @@ export default class ListJob extends Component {
       </>
     );
   };
-  keyExtractor = (item, index) => index.toString();
+  keyExtractor = (item, index) => item.key;
   //Separator
   ItemSeparatorComponent = () => <View style={styles.separator}></View>;
   ListEmptyComponent = () => (
@@ -114,20 +115,21 @@ export default class ListJob extends Component {
     return (
       <ImageHeaderScrollView
         maxHeight={200}
-        minHeight={1}
+        minHeight={0}
         renderHeader={() => (
           <Image
-            resizeMode={'cover'}
+            resizeMode={'contain'}
             source={{uri: item.banner}}
             style={styles.banner}
             PlaceholderContent={<ActivityIndicator />}></Image>
         )}>
-        <View style={{height: 1000}}>
-          <TriggeringView onHide={() => console.log('text hidden')}>
+        <View>
+          <TriggeringView>
             <FlatList
               data={this.state.data}
               renderItem={this.renderItem}
               keyExtractor={this.keyExtractor}
+              ItemSeparatorComponent={this.ItemSeparatorComponent}
             />
           </TriggeringView>
         </View>
