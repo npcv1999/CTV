@@ -1,7 +1,5 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {
   HomeStackScreen,
@@ -10,7 +8,8 @@ import {
   ProfileScreen,
 } from '../Screens/StackScreen';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
-import Job from './Job';
+
+import Job from '../Screens/Job';
 const Tab = createMaterialBottomTabNavigator();
 export default function BottomTab({size = 20}) {
   return (

@@ -1,18 +1,12 @@
-import React, {useState, useEffect} from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  View,
-  Text,
-  StatusBar,
-  TouchableOpacity,
-  KeyboardAvoidingView,
-  Alert,
-} from 'react-native';
+import React from 'react';
+
+import {LogBox} from 'react-native';
 import 'react-native-gesture-handler';
 import Providers from './navigation';
 
 const App = () => {
+  LogBox.ignoreAllLogs();
   return <Providers></Providers>;
+  // return <TestScreen></TestScreen>;
 };
 export default App;

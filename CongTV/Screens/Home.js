@@ -11,8 +11,8 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import 'react-native-gesture-handler';
-import DbITviec from '../db/DbITviec';
-import DbDevWork from '../db/DbDevWork';
+import DbITviec from './DbITviec';
+import DbDevWork from './DbDevWork';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import MaskedTitle from '../Component/MaskedTitle';
 const Tab = createMaterialTopTabNavigator();

@@ -57,7 +57,7 @@ export default class DbITviec extends React.Component {
                   }}>
                   <Text style={styles.title}>{obj.item.title}</Text>
                   <Text style={styles.tag}>Mức lương:</Text>
-                  <Text style={styles.text}>{obj.item.slary}</Text>
+                  <Text style={styles.text}>{obj.item.salary}</Text>
                 </TouchableOpacity>
               </View>
               {/* <TouchableOpacity style={styles.heart} onPress={(e) => this.add(e)}>
@@ -134,7 +134,7 @@ export default class DbITviec extends React.Component {
   }
 
   render() {
-    // console.log(this.state.data);
+    console.log(this.state.data);
     //Loading
     if (this.state.loading) {
       // return (

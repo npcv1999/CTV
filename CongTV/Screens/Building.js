@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {StyleSheet} from 'react-native';
 import {createStackNavigator, HeaderTitle} from '@react-navigation/stack';
-import HomeBuilding from '../Component/HomeBuilding';
-import DetailBuilding from '../Component/DetailBuilding';
+import HomeBuilding from './HomeBuilding';
+import DetailBuilding from './DetailBuilding';
 import ListJob from '../Component/ListJob';
 
 const Stack = createStackNavigator();

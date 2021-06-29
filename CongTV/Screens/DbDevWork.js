@@ -13,6 +13,7 @@ import Loading from '../Component/Loading';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {Image} from 'react-native-elements';
 import RNAnimated from 'react-native-animated-component';
+import BaseUrl from '../db/BaseUrl';
 export default class DbDevWork extends React.Component {
   constructor(props) {
     super(props);
@@ -72,7 +73,7 @@ export default class DbDevWork extends React.Component {
   );
   //Fetch data
   componentDidMount() {
-    const url = 'https://congtimviec.firebaseio.com/devwork.json';
+    const url = BaseUrl.baseUrl + 'devwork.json';
     fetch(url)
       .then((response) => response.json())
       .then((json) => {

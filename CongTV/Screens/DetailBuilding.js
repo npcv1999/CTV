@@ -21,7 +21,7 @@ import Comment from 'react-native-vector-icons/MaterialCommunityIcons';
 const WIDTH = Dimensions.get('screen').width;
 
 import firebase from '../db/firebase';
-import LoadingComments from './LoadingComments';
+import LoadingComments from '../Component/LoadingComments';
 
 export class BtnComment extends React.Component {
   render() {
@@ -109,8 +109,6 @@ export default class DetailBuilding extends React.Component {
     });
   }
   async componentDidMount() {
-    LogBox.ignoreLogs(['Setting a timer']);
-    LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
     const route = this.props.route.params;
     const item = route.item;
     const index = route.index;

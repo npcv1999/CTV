@@ -4,7 +4,7 @@ import auth from '@react-native-firebase/auth';
 import {AuthContext} from './AuthProvider';
 
 import AuthStack from './AuthStack';
-import BottomTab from '../Component/BottomTab';
+
 import HomeStack from './HomeStack';
 
 export default function Routes() {

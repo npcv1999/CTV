@@ -57,7 +57,6 @@ export default class HomeBuilding extends Component {
       .then((response) => response.json())
       .then((json) => {
         this.setState({data: json, loading: false});
-        console.log(json);
       })
       .catch(function (error) {
         console.log(
@@ -75,6 +74,12 @@ export default class HomeBuilding extends Component {
     if (this.state.loading) {
       return <Loading></Loading>;
     }
+    //Check array[index] !=null------------------------
+    var filtered = this.state.data.filter(function (el) {
+      return el != null;
+    });
+    console.log(filtered);
+
     return (
       <>
         <View
@@ -82,36 +87,11 @@ export default class HomeBuilding extends Component {
             margin: 5,
             justifyContent: 'center',
             alignItems: 'center',
-          }}>
-          {/* <Tooltip
-            width={WIDTH - 20}
-            height={150}
-            backgroundColor="#bfbfbf"
-            popover={
-              <View>
-                <Quote name="quote-left" size={30}></Quote>
-                <Text style={{textAlign: 'justify'}}>
-                  Các Công ty Công nghệ lọt vào danh sách này dựa trên những
-                  tiêu chí Chất lượng sản phẩm - Môi trường làm việc - Chế độ
-                  đãi ngộ - Khả năng học hỏi do CổngTìmViệc đánh giá, để đảm bảo
-                  rằng đây là nơi làm việc tốt nhất dành cho bạn.
-                </Text>
-              </View>
-            }>
-            <Text
-              style={{
-                backgroundColor: 'yellow',
-                alignItems: 'center',
-                fontStyle: 'italic',
-              }}>
-              Chọn mình trước nếu bạn chưa đọc nhé!!!
-            </Text>
-          </Tooltip> */}
-        </View>
+          }}></View>
         <View style={{flex: 1, marginHorizontal: 5}}>
           <FlatList
             numColumns={2}
-            data={this.state.data}
+            data={filtered}
             renderItem={({item, index}) => (
               <View style={styles.item}>
                 <Image
@@ -167,6 +147,10 @@ export default class HomeBuilding extends Component {
 }
 const styles = StyleSheet.create({
   item: {
+    //set item lẻ
+    minWidth: (WIDTH - 25) / 3,
+    maxWidth: (WIDTH - 25) / 2,
+    //
     padding: 5,
     flex: 1,
     justifyContent: 'center',
